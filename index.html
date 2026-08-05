@@ -11,6 +11,8 @@
 
   <meta name="theme-color" content="#6f45ff" />
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
   <title>Rentsiho | Rental Management Made Simple</title>
 
   <style>
@@ -1279,11 +1281,232 @@
       transform: translateY(0);
     }
 
+
+    /* Contact and social */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .contact-card,
+    .download-card {
+      padding: 38px;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 55px rgba(22, 27, 55, 0.08);
+    }
+
+    .contact-card {
+      background:
+        radial-gradient(circle at 100% 0%, rgba(111,69,255,.07), transparent 28%),
+        var(--white);
+    }
+
+    .contact-card h3,
+    .download-card h3 {
+      margin-bottom: 12px;
+      color: var(--dark);
+      font-size: 29px;
+      line-height: 1.2;
+      letter-spacing: -.6px;
+    }
+
+    .contact-card > p,
+    .download-card > p {
+      margin-bottom: 26px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .contact-link {
+      min-height: 72px;
+      padding: 14px 16px;
+      border-radius: 17px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--dark);
+      background: #fbfbfe;
+      border: 1px solid #e8e9f2;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-4px);
+      border-color: #cfc4ff;
+      background: var(--white);
+      box-shadow: 0 16px 38px rgba(40, 34, 86, .10);
+    }
+
+    .contact-icon {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, #7650ff, #9b7cff);
+      box-shadow: 0 10px 22px rgba(111,69,255,.22);
+    }
+
+    .contact-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      display: block;
+    }
+
+    .contact-link.youtube .contact-icon {
+      background: linear-gradient(135deg, #ff343f, #d50012);
+      box-shadow: 0 10px 22px rgba(224,0,20,.20);
+    }
+
+    .contact-link.instagram .contact-icon {
+      background: linear-gradient(135deg, #f9ce34 0%, #ee2a7b 47%, #6228d7 100%);
+      box-shadow: 0 10px 22px rgba(214,41,118,.20);
+    }
+
+    .contact-link.dashboard-link .contact-icon {
+      background: linear-gradient(135deg, #2779ec, #52b6ff);
+      box-shadow: 0 10px 22px rgba(39,121,236,.20);
+    }
+
+    .contact-link.company-link .contact-icon {
+      background: linear-gradient(135deg, #11a887, #27d1ad);
+      box-shadow: 0 10px 22px rgba(17,168,135,.20);
+    }
+
+    .contact-copy {
+      min-width: 0;
+      display: block;
+    }
+
+    .contact-copy strong {
+      display: block;
+      color: var(--dark);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .contact-copy small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+
+    .contact-arrow {
+      margin-left: auto;
+      color: #a4a8b7;
+      font-size: 18px;
+      transition: transform .25s ease, color .25s ease;
+    }
+
+    .contact-link:hover .contact-arrow {
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    .download-card {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 92% 4%, rgba(255,255,255,.15), transparent 28%),
+        radial-gradient(circle at 0% 100%, rgba(111,69,255,.28), transparent 34%),
+        linear-gradient(135deg, #14182d, #252b4f);
+      border: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .download-card h3 { color: var(--white); }
+    .download-card > p { color: rgba(255,255,255,.72); }
+
+    .play-badge {
+      width: fit-content;
+      min-height: 68px;
+      padding: 11px 19px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--white);
+      background: #07080d;
+      border: 1px solid rgba(255,255,255,.16);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .play-badge:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 38px rgba(0,0,0,.30);
+    }
+
+    .play-badge svg { width: 31px; height: 31px; display:block; }
+    .play-badge small { display:block; font-size:10px; letter-spacing:1px; text-transform:uppercase; }
+    .play-badge strong { display:block; font-size:20px; line-height:1.1; }
+
+    .download-benefits {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .download-benefit {
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.11);
+    }
+
+    .download-benefit svg {
+      width: 20px;
+      height: 20px;
+      margin-bottom: 9px;
+      fill: #9be7d9;
+    }
+
+    .download-benefit strong { display:block; font-size:14px; }
+    .download-benefit span { display:block; margin-top:2px; color:rgba(255,255,255,.62); font-size:12px; }
+
+    .social-row {
+      margin-top: 22px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .social-button {
+      width: 44px;
+      height: 44px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .social-button svg { width:19px; height:19px; fill:currentColor; }
+    .social-button:hover { transform:translateY(-3px); background:var(--primary); }
+
     /* Responsive */
 
     @media (max-width: 1080px) {
       .hero-grid,
-      .product-grid {
+      .product-grid,
+      .contact-grid {
         grid-template-columns: 1fr;
       }
 
@@ -1466,6 +1689,10 @@
         grid-template-columns: 1fr;
       }
 
+      .download-benefits {
+        grid-template-columns: 1fr;
+      }
+
       .footer-bottom {
         flex-direction: column;
         align-items: flex-start;
@@ -1494,21 +1721,24 @@
         <a href="#how-it-works">How it works</a>
         <a href="#locations">Locations</a>
         <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
       </nav>
 
       <div class="nav-actions">
         <a
           class="nav-login"
-          href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net"
+          href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" target="_blank" rel="noopener noreferrer"
         >
-          Login
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Dashboard
         </a>
 
         <a
           class="nav-cta"
-          href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net"
+          href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" target="_blank" rel="noopener noreferrer"
         >
-          Open Platform
+          <i class="fa-solid fa-gauge-high"></i>
+          Open Rentsiho Dashboard
         </a>
 
         <button
@@ -1547,16 +1777,12 @@
           </p>
 
           <div class="hero-actions">
-            <a
-              class="btn btn-primary"
-              href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net"
-            >
-              Open Rental Management
-              <span>→</span>
+            <a class="btn btn-primary" href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" target="_blank" rel="noopener noreferrer">
+              <i class="fa-solid fa-gauge-high"></i> Open Rentsiho Dashboard <span>→</span>
             </a>
 
-            <a class="btn btn-outline" href="#features">
-              Explore Features
+            <a class="btn btn-outline" href="https://play.google.com/store/apps/details?id=com.lumy.rental_app&pcampaignid=web_share" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-google-play"></i> Download Android App
             </a>
           </div>
 
@@ -1843,9 +2069,9 @@
           <div style="margin-top:30px;">
             <a
               class="btn btn-primary"
-              href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net"
+              href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" target="_blank" rel="noopener noreferrer"
             >
-              Open the Platform →
+              <i class="fa-solid fa-gauge-high"></i> Open Rentsiho Dashboard →
             </a>
           </div>
         </div>
@@ -2142,14 +2368,70 @@
             </button>
             <div class="faq-answer">
               <p>
-                Click any “Open Platform” or “Open Rental Management” button
-                on this website. You will be taken to the live Azure application.
+                Click any “Open Rentsiho Dashboard” button to open the live web dashboard.
+                To install the Android mobile app, use the Google Play download button.
               </p>
             </div>
           </div>
 
         </div>
 
+      </div>
+    </section>
+
+
+    <section class="section section-soft" id="contact">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div class="section-kicker">Connect with Rentsiho</div>
+          <h2 class="section-title">Contact, follow and access our products</h2>
+          <p class="section-description">Contact our team, follow Lumiin Software updates, visit the company website, open the Rentsiho dashboard or download the Android app.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card reveal">
+            <h3>Stay connected</h3>
+            <p>Choose a channel below to contact us or explore our products and company.</p>
+            <div class="contact-list">
+              <a class="contact-link" href="mailto:taxideals.ch@gmail.com">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg></span>
+                <span class="contact-copy"><strong>Email support</strong><small>taxideals.ch@gmail.com</small></span><span class="contact-arrow">→</span>
+              </a>
+              <a class="contact-link company-link" href="https://ambitious-field-08710bb10.7.azurestaticapps.net/" target="_blank" rel="noopener noreferrer">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.9 6h-3.1a15 15 0 0 0-1.4-3.5A8.1 8.1 0 0 1 18.9 8ZM12 4c.9 1.1 1.6 2.4 1.9 4h-3.8c.3-1.6 1-2.9 1.9-4ZM4.3 14a8 8 0 0 1 0-4h3.4a16.5 16.5 0 0 0 0 4H4.3Zm.8 2h3.1a15 15 0 0 0 1.4 3.5A8.1 8.1 0 0 1 5.1 16Zm3.1-8H5.1a8.1 8.1 0 0 1 4.5-3.5A15 15 0 0 0 8.2 8ZM12 20c-.9-1.1-1.6-2.4-1.9-4h3.8c-.3 1.6-1 2.9-1.9 4Zm2.3-6H9.7a14.4 14.4 0 0 1 0-4h4.6a14.4 14.4 0 0 1 0 4Zm.1 5.5a15 15 0 0 0 1.4-3.5h3.1a8.1 8.1 0 0 1-4.5 3.5Zm1.9-5.5a16.5 16.5 0 0 0 0-4h3.4a8 8 0 0 1 0 4h-3.4Z"/></svg></span>
+                <span class="contact-copy"><strong>Lumiin Software website</strong><small>Visit our official company website</small></span><span class="contact-arrow">→</span>
+              </a>
+              <a class="contact-link dashboard-link" href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" target="_blank" rel="noopener noreferrer">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h8v8H3V3Zm10 0h8v5h-8V3ZM3 13h8v8H3v-8Zm10-3h8v11h-8V10Z"/></svg></span>
+                <span class="contact-copy"><strong>Rentsiho rental dashboard</strong><small>Open the rental-management portal</small></span><span class="contact-arrow">→</span>
+              </a>
+              <a class="contact-link youtube" href="https://www.youtube.com/@taxidealsch959" target="_blank" rel="noopener noreferrer">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z"/></svg></span>
+                <span class="contact-copy"><strong>YouTube channel</strong><small>@taxidealsch959</small></span><span class="contact-arrow">→</span>
+              </a>
+              <a class="contact-link instagram" href="https://www.instagram.com/lumiinsoftware/" target="_blank" rel="noopener noreferrer">
+                <span class="contact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6Zm9.7 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></span>
+                <span class="contact-copy"><strong>Instagram</strong><small>@lumiinsoftware</small></span><span class="contact-arrow">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="download-card reveal">
+            <span class="pill pill-dark">Android application</span>
+            <h3 style="margin-top:18px;">Manage rentals from your mobile phone</h3>
+            <p>Download the official Rentsiho Android app from Google Play and access rental-management features wherever you are.</p>
+            <a class="play-badge" href="https://play.google.com/store/apps/details?id=com.lumy.rental_app&pcampaignid=web_share" target="_blank" rel="noopener noreferrer" aria-label="Get Rentsiho on Google Play">
+              <svg viewBox="0 0 32 36" aria-hidden="true"><path fill="#34A853" d="M1.8 2.2C1.3 2.8 1 3.7 1 4.8v26.4c0 1.1.3 2 .8 2.6L17.7 18 1.8 2.2Z"/><path fill="#4285F4" d="m23 12.7-5.3 5.3L1.8 2.2c.7-.7 1.8-.8 3-.1L23 12.7Z"/><path fill="#FBBC04" d="m23 23.3-5.3-5.3 5.3-5.3 6.2 3.6c1.8 1 1.8 2.4 0 3.4L23 23.3Z"/><path fill="#EA4335" d="M4.8 33.9c-1.2.7-2.3.6-3-.1L17.7 18l5.3 5.3L4.8 33.9Z"/></svg>
+              <span><small>Get it on</small><strong>Google Play</strong></span>
+            </a>
+            <div class="download-benefits">
+              <div class="download-benefit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h8v8H3V3Zm10 0h8v5h-8V3ZM3 13h8v8H3v-8Zm10-3h8v11h-8V10Z"/></svg><strong>Mobile access</strong><span>Use Rentsiho on Android.</span></div>
+              <div class="download-benefit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.9 6h-3.1a15 15 0 0 0-1.4-3.5A8.1 8.1 0 0 1 18.9 8ZM12 4c.9 1.1 1.6 2.4 1.9 4h-3.8c.3-1.6 1-2.9 1.9-4ZM4.3 14a8 8 0 0 1 0-4h3.4a16.5 16.5 0 0 0 0 4H4.3Zm.8 2h3.1a15 15 0 0 0 1.4 3.5A8.1 8.1 0 0 1 5.1 16Zm3.1-8H5.1a8.1 8.1 0 0 1 4.5-3.5A15 15 0 0 0 8.2 8ZM12 20c-.9-1.1-1.6-2.4-1.9-4h3.8c-.3 1.6-1 2.9-1.9 4Zm2.3-6H9.7a14.4 14.4 0 0 1 0-4h4.6a14.4 14.4 0 0 1 0 4Zm.1 5.5a15 15 0 0 0 1.4-3.5h3.1a8.1 8.1 0 0 1-4.5 3.5Zm1.9-5.5a16.5 16.5 0 0 0 0-4h3.4a8 8 0 0 1 0 4h-3.4Z"/></svg><strong>Owner and tenant login</strong><span>Role-based experiences.</span></div>
+              <div class="download-benefit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg><strong>Property information</strong><span>Access rental records easily.</span></div>
+              <div class="download-benefit"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6Zm9.7 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg><strong>Rent and reviews</strong><span>View summaries and feedback.</span></div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2166,12 +2448,10 @@
             information through one clear professional platform.
           </p>
 
-          <a
-            class="btn btn-white"
-            href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net"
-          >
-            Open Rental Management →
-          </a>
+          <div style="position:relative;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">
+            <a class="btn btn-white" href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-gauge-high"></i> Open Rentsiho Dashboard</a>
+            <a class="btn" style="color:white;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);" href="https://play.google.com/store/apps/details?id=com.lumy.rental_app&pcampaignid=web_share" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-google-play"></i> Download App</a>
+          </div>
         </div>
 
       </div>
@@ -2210,22 +2490,23 @@
           <div class="footer-links">
             <a href="#locations">Locations</a>
             <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
             <a href="#home">About Rentsiho</a>
           </div>
         </div>
 
         <div>
-          <div class="footer-title">Access</div>
+          <div class="footer-title">Products & Contact</div>
           <div class="footer-links">
-            <a href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net">
-              Owner Login
-            </a>
-            <a href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net">
-              Tenant Login
-            </a>
-            <a href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net">
-              Open Platform
-            </a>
+            <a href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" target="_blank" rel="noopener noreferrer">Rentsiho Dashboard</a>
+            <a href="https://ambitious-field-08710bb10.7.azurestaticapps.net/" target="_blank" rel="noopener noreferrer">Lumiin Software</a>
+            <a href="https://play.google.com/store/apps/details?id=com.lumy.rental_app&pcampaignid=web_share" target="_blank" rel="noopener noreferrer">Android App</a>
+            <a href="mailto:taxideals.ch@gmail.com">taxideals.ch@gmail.com</a>
+          </div>
+          <div class="social-row">
+            <a class="social-button" href="https://www.youtube.com/@taxidealsch959" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z"/></svg></a>
+            <a class="social-button" href="https://www.instagram.com/lumiinsoftware/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6Zm9.7 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></a>
+            <a class="social-button" href="mailto:taxideals.ch@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg></a>
           </div>
         </div>
 
@@ -2239,7 +2520,7 @@
         <div class="footer-bottom-links">
           <a href="#home">Privacy</a>
           <a href="#home">Terms</a>
-          <a href="#home">Contact</a>
+          <a href="#contact">Contact</a>
         </div>
       </div>
 
