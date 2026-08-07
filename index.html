@@ -9,7 +9,8 @@
     content="Rentsiho is a modern rental property management platform for owners and tenants across India, Switzerland and Indonesia."
   />
 
-  <meta name="theme-color" content="#263038" />
+  <meta name="theme-color" content="#0d1c28" />
+  <link rel="icon" type="image/png" href="rentsiho-logo.png" />
   <link rel="preconnect" href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" crossorigin />
   <link rel="dns-prefetch" href="//newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net" />
 
@@ -20,12 +21,12 @@
 
   <style>
     :root {
-      --primary: #c9a45c;
-      --primary-dark: #9f7b38;
-      --primary-soft: #f5eddc;
-      --secondary: #d9bc7c;
-      --dark: #252f38;
-      --dark-2: #172029;
+      --primary: #c89f45;
+      --primary-dark: #9a742c;
+      --primary-soft: #f7f0df;
+      --secondary: #e0b95f;
+      --dark: #0d1c28;
+      --dark-2: #08131d;
       --text: #2d3338;
       --muted: #687078;
       --light: #f7f5f0;
@@ -254,18 +255,30 @@
 
 
     .brand-logo {
-      width: 158px;
-      height: 58px;
-      object-fit: cover;
+      width: 205px;
+      height: 72px;
+      object-fit: contain;
       object-position: center;
-      border-radius: 10px;
-      border: 1px solid #e5d7b8;
-      box-shadow: 0 8px 22px rgba(37, 47, 56, 0.12);
+      display: block;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      filter: contrast(1.06) saturate(1.05);
     }
 
     .footer-logo {
-      width: 190px;
-      height: 72px;
+      width: min(390px, 100%);
+      height: auto;
+      max-height: 125px;
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      filter: none;
     }
 
     .nav-links {
@@ -1234,7 +1247,7 @@
     .footer {
       padding: 72px 0 26px;
       color: rgba(255,255,255,.68);
-      background: #151c22;
+      background: #0d1c28;
     }
 
     .footer-grid {
@@ -1779,8 +1792,13 @@
       }
 
       .brand-logo {
-        width: 128px;
-        height: 48px;
+        width: 150px;
+        height: 54px;
+      }
+
+      .footer-logo {
+        width: min(320px, 100%);
+        max-height: 105px;
       }
     }
   </style>
@@ -1792,7 +1810,7 @@
     <div class="container nav">
 
       <a href="#home" class="brand" aria-label="Rentsiho home">
-        <img class="brand-logo" src="rentsiho-logo.jpeg" alt="Rentsiho Property Management logo" />
+        <img class="brand-logo" src="rentsiho-logo.png" alt="Rentsiho Property Management logo" />
       </a>
 
       <nav class="nav-links" id="navLinks">
@@ -2556,7 +2574,7 @@
 
         <div class="footer-brand">
           <a href="#home" class="brand" style="color:white;">
-            <img class="brand-logo footer-logo" src="rentsiho-logo.jpeg" alt="Rentsiho Property Management logo" />
+            <img class="footer-logo" src="rentshilo-footer.png" alt="Rentsiho Property Management logo" />
           </a>
 
           <p>
@@ -2704,4 +2722,3 @@
 
 </body>
 </html>
-<!-- redeploy 2026 -->
