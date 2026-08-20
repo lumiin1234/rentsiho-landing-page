@@ -6,7 +6,7 @@
 
   <meta
     name="description"
-    content="Rentsiho is a modern rental property management platform for owners and tenants across India, Switzerland and Indonesia."
+    content="Rentsiho is a modern rental property management platform for owners and tenants across India, Switzerland and the USA."
   />
 
   <meta name="theme-color" content="#0d1c28" />
@@ -754,6 +754,130 @@
       color: #777c8d;
       font-weight: 900;
       letter-spacing: .5px;
+    }
+
+
+    /* About Us */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-visual {
+      min-height: 470px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,.22), transparent 24%),
+        linear-gradient(145deg, #0d1c28, #263747);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-visual::before {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      right: -70px;
+      top: -70px;
+      border-radius: 50%;
+      border: 42px solid rgba(212,167,44,.16);
+    }
+
+    .about-visual::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      left: -70px;
+      bottom: -75px;
+      border-radius: 50%;
+      background: rgba(212,167,44,.10);
+    }
+
+    .about-card {
+      position: absolute;
+      inset: 54px 38px;
+      z-index: 1;
+      padding: 34px;
+      border-radius: 24px;
+      color: var(--white);
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .about-logo {
+      width: 220px;
+      max-height: 90px;
+      margin-bottom: 24px;
+      object-fit: contain;
+      object-position: left center;
+      filter: none;
+    }
+
+    .about-card h3 {
+      margin-bottom: 10px;
+      font-size: 27px;
+      line-height: 1.2;
+    }
+
+    .about-card p {
+      color: rgba(255,255,255,.72);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .about-year {
+      margin-top: 22px;
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      color: #f7e7b7;
+      background: rgba(212,167,44,.16);
+      border: 1px solid rgba(212,167,44,.28);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .about-copy h2 {
+      margin: 14px 0 22px;
+      color: var(--dark);
+      font-size: clamp(36px, 4.6vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -1.8px;
+    }
+
+    .about-copy p {
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .about-copy p strong {
+      color: var(--dark);
+    }
+
+    .about-tagline {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 14px 14px 0;
+      color: var(--dark);
+      background: var(--primary-soft);
+      font-size: 17px;
+      font-weight: 900;
     }
 
     /* Features */
@@ -2110,6 +2234,17 @@
         max-height: 105px;
       }
     }
+
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 38px; }
+      .about-visual { min-height: 390px; }
+    }
+
+    @media (max-width: 560px) {
+      .about-card { inset: 24px 18px; padding: 24px; }
+      .about-logo { width: 175px; }
+      .about-visual { min-height: 370px; }
+    }
   </style>
 </head>
 
@@ -2123,6 +2258,7 @@
       </a>
 
       <nav class="nav-links" id="navLinks">
+        <a href="#about">About Us</a>
         <a href="#features">Features</a>
         <a href="#platform">Platform</a>
         <a href="#how-it-works">How it works</a>
@@ -2347,6 +2483,58 @@
       </div>
     </section>
 
+    <section class="section" id="about">
+      <div class="container">
+        <div class="about-grid">
+
+          <div class="about-visual reveal">
+            <div class="about-card">
+              <img class="about-logo" src="rentshilo-footer.png" alt="Rentsiho logo" />
+              <h3>Modern property management, made simpler.</h3>
+              <p>
+                One centralized platform designed to help property owners,
+                landlords and property managers stay organized and manage
+                everyday rental operations more efficiently.
+              </p>
+              <span class="about-year">
+                <i class="fa-solid fa-calendar-check"></i> Developed in December 2025
+              </span>
+            </div>
+          </div>
+
+          <div class="about-copy reveal">
+            <div class="section-kicker">About RentSiho</div>
+            <h2>Simple, powerful property management in one place</h2>
+
+            <p>
+              RentSiho is a modern property management software developed in
+              December 2025 to simplify and streamline the way property owners,
+              landlords, and property managers manage their properties.
+            </p>
+
+            <p>
+              Built with a focus on <strong>efficiency, transparency, and convenience</strong>,
+              RentSiho brings essential property management activities into one
+              centralized platform. From property and tenant management to rental
+              tracking, payments, maintenance, and reporting, RentSiho is designed
+              to reduce administrative work and make property management easier.
+            </p>
+
+            <p>
+              Our goal is to provide a simple yet powerful solution that helps
+              property owners and managers <strong>save time, stay organized, and
+              manage their properties more effectively.</strong>
+            </p>
+
+            <div class="about-tagline">
+              RentSiho - Simplifying Property Management.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <section class="section section-soft" id="features">
       <div class="container">
 
@@ -2532,7 +2720,7 @@
                   <div class="mini-row-icon">🏡</div>
                   <div>
                     <strong>Green Villa</strong>
-                    <small>Bali, Indonesia</small>
+                    <small>Austin, USA</small>
                   </div>
                 </div>
                 <span class="mini-chip">Occupied</span>
@@ -2605,7 +2793,7 @@
 
           <p class="section-description">
             Rentsiho is positioned to serve property owners and tenants
-            across India, Switzerland and Indonesia.
+            across India, Switzerland and the USA.
           </p>
         </div>
 
@@ -2630,11 +2818,11 @@
           </article>
 
           <article class="region-card reveal">
-            <div class="region-flag">🇮🇩</div>
-            <h3>Indonesia</h3>
+            <div class="region-flag">🇺🇸</div>
+            <h3>USA</h3>
             <p>
-              Simple property and rental-management tools for residential
-              rental operations.
+              Streamlined property and rental-management tools for owners,
+              managers and tenants across the United States.
             </p>
           </article>
 
@@ -2701,7 +2889,7 @@
               <div class="person-avatar">TN</div>
               <div>
                 <strong>Tenant</strong>
-                <small>Indonesia</small>
+                <small>USA</small>
               </div>
             </div>
           </article>
@@ -2888,7 +3076,7 @@
 
           <p>
             A modern rental property management platform for owners
-            and tenants across India, Switzerland and Indonesia.
+            and tenants across India, Switzerland and the USA.
           </p>
         </div>
 
@@ -2907,7 +3095,7 @@
             <a href="#locations">Locations</a>
             <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
-            <a href="#home">About Rentsiho</a>
+            <a href="#about">About Rentsiho</a>
           </div>
         </div>
 
