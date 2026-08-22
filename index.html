@@ -1716,312 +1716,7 @@
     }
 
 
-    /* ============================================================
-       FRONTEND-ONLY DEMO LOGIN + DASHBOARD
-       No backend/API is used for this demo.
-       ============================================================ */
 
-    .demo-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 7000;
-      display: none;
-      overflow-y: auto;
-      background: #f7f5f0;
-    }
-
-    .demo-screen.show {
-      display: block;
-    }
-
-    .demo-login-page {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 42px 20px;
-      background:
-        radial-gradient(circle at 80% 15%, rgba(212,167,44,.15), transparent 25%),
-        linear-gradient(180deg, #fffef9 0%, #f7f5f0 100%);
-    }
-
-    .demo-login-card {
-      width: min(500px, 100%);
-      padding: 38px;
-      border-radius: 26px;
-      background: #fff;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .demo-login-logo {
-      width: 180px;
-      margin: 0 auto 18px;
-    }
-
-    .demo-login-card h2 {
-      text-align: center;
-      color: var(--dark);
-      font-size: 34px;
-      margin-bottom: 8px;
-    }
-
-    .demo-login-card > p {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-
-    .demo-form-group {
-      margin-bottom: 18px;
-    }
-
-    .demo-form-group label {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--dark);
-      font-size: 14px;
-      font-weight: 800;
-    }
-
-    .demo-form-group input,
-    .demo-form-group select {
-      width: 100%;
-      height: 54px;
-      padding: 0 16px;
-      border: 1px solid #dfd7c5;
-      border-radius: 14px;
-      outline: none;
-      color: var(--dark);
-      background: #fffdf8;
-    }
-
-    .demo-form-group input:focus,
-    .demo-form-group select:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(212,167,44,.12);
-    }
-
-    .demo-login-hint {
-      margin: 4px 0 20px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      color: #6a5425;
-      background: #fbf3df;
-      border: 1px solid #ead9a8;
-      font-size: 13px;
-    }
-
-    .demo-login-submit {
-      width: 100%;
-      min-height: 56px;
-      border: 0;
-      border-radius: 14px;
-      color: #fff;
-      background: linear-gradient(135deg, var(--primary), #b88917);
-      font-weight: 900;
-      cursor: pointer;
-      box-shadow: 0 16px 34px rgba(169,121,18,.24);
-    }
-
-    .demo-back-btn {
-      width: 100%;
-      margin-top: 12px;
-      min-height: 50px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      background: #fff;
-      color: var(--dark);
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .demo-dashboard-page {
-      min-height: 100vh;
-      background: #f5f6f8;
-    }
-
-    .demo-dashboard-topbar {
-      min-height: 74px;
-      padding: 0 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 2;
-    }
-
-    .demo-dashboard-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 900;
-      color: var(--dark);
-    }
-
-    .demo-dashboard-brand img {
-      width: 150px;
-      height: 54px;
-      object-fit: contain;
-    }
-
-    .demo-logout-btn {
-      min-height: 42px;
-      padding: 0 16px;
-      border-radius: 11px;
-      border: 1px solid var(--border);
-      background: #fff;
-      color: var(--dark);
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .demo-dashboard-layout {
-      display: grid;
-      grid-template-columns: 230px 1fr;
-      min-height: calc(100vh - 74px);
-    }
-
-    .demo-dashboard-sidebar {
-      padding: 24px 16px;
-      background: #0d1c28;
-      color: #fff;
-    }
-
-    .demo-menu-item {
-      width: 100%;
-      min-height: 46px;
-      margin-bottom: 8px;
-      padding: 0 14px;
-      border: 0;
-      border-radius: 11px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255,255,255,.78);
-      background: transparent;
-      cursor: pointer;
-      text-align: left;
-      font-weight: 700;
-    }
-
-    .demo-menu-item.active,
-    .demo-menu-item:hover {
-      color: #fff;
-      background: rgba(212,167,44,.18);
-    }
-
-    .demo-dashboard-main {
-      padding: 30px;
-    }
-
-    .demo-dashboard-title h2 {
-      color: var(--dark);
-      font-size: 30px;
-    }
-
-    .demo-dashboard-title p {
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .demo-dashboard-stats {
-      margin-top: 24px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .demo-stat-box,
-    .demo-table-card {
-      padding: 22px;
-      border-radius: 18px;
-      background: #fff;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .demo-stat-box small {
-      color: var(--muted);
-      font-weight: 800;
-    }
-
-    .demo-stat-box strong {
-      display: block;
-      margin-top: 7px;
-      color: var(--dark);
-      font-size: 29px;
-    }
-
-    .demo-table-card {
-      margin-top: 22px;
-      overflow-x: auto;
-    }
-
-    .demo-table-card h3 {
-      color: var(--dark);
-      margin-bottom: 16px;
-    }
-
-    .demo-table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 720px;
-    }
-
-    .demo-table th,
-    .demo-table td {
-      padding: 13px 12px;
-      border-bottom: 1px solid #eee8dc;
-      text-align: left;
-      font-size: 14px;
-    }
-
-    .demo-table th {
-      color: #6b6253;
-      background: #fcfaf5;
-    }
-
-    .demo-status {
-      display: inline-flex;
-      padding: 5px 9px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      background: #e9f8ef;
-      color: #187443;
-    }
-
-    .demo-status.vacant {
-      background: #fff3dd;
-      color: #9b6511;
-    }
-
-    .demo-panel-section { display: none; }
-    .demo-panel-section.active { display: block; }
-
-    @media (max-width: 900px) {
-      .demo-dashboard-layout { grid-template-columns: 1fr; }
-      .demo-dashboard-sidebar {
-        display: flex;
-        gap: 8px;
-        overflow-x: auto;
-        padding: 12px;
-      }
-      .demo-menu-item { min-width: max-content; margin-bottom: 0; }
-      .demo-dashboard-stats { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 560px) {
-      .demo-login-card { padding: 26px 20px; }
-      .demo-dashboard-topbar { padding: 0 14px; }
-      .demo-dashboard-brand img { width: 120px; }
-      .demo-dashboard-main { padding: 18px; }
-      .demo-dashboard-stats { grid-template-columns: 1fr; }
-    }
 
     /* Responsive */
 
@@ -3135,48 +2830,6 @@
   </footer>
 
 
-
-  <!-- ============================================================
-       FRONTEND-ONLY DEMO LOGIN
-       ============================================================ -->
-  <section class="demo-screen" id="demoLoginScreen" aria-hidden="true">
-    <div class="demo-login-page">
-      <div class="demo-login-card">
-        <img class="demo-login-logo" src="rentsiho-logo.png" alt="Rentsiho logo" />
-        <h2>Demo Login</h2>
-        <p>Demo details are already filled. Just click Login.</p>
-
-        <form id="demoLoginForm">
-          <div class="demo-form-group">
-            <label for="demoEmail">Email</label>
-            <input id="demoEmail" type="email" value="demo@rentsiho.com" readonly />
-          </div>
-
-          <div class="demo-form-group">
-            <label for="demoPassword">Password</label>
-            <input id="demoPassword" type="text" value="123456" readonly />
-          </div>
-
-          <div class="demo-form-group">
-            <label for="demoRole">Login as</label>
-            <select id="demoRole" disabled>
-              <option value="owner" selected>Landlord</option>
-            </select>
-          </div>
-
-          <div class="demo-login-hint">
-            Frontend demo only — no real account, API, cookie or database is used.
-          </div>
-
-          <button class="demo-login-submit" type="submit">
-            <i class="fa-solid fa-right-to-bracket"></i> Login
-          </button>
-          <button class="demo-back-btn" type="button" id="demoBackToHome">Back to website</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
   <!-- ============================================================
        FRONTEND-ONLY DEMO DASHBOARD
        ============================================================ -->
@@ -3351,13 +3004,14 @@
     });
 
     // ============================================================
-    // RENTSIHO -> REAL FLUTTER DEMO LOGIN
     // ============================================================
-    const rentsihoDemoLoginUrl =
+    // RENTSIHO -> REAL FLUTTER LOGIN PAGE
+    // ============================================================
+    const rentsihoLoginUrl =
       "https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net/?demo=true#/next2";
 
     document.querySelectorAll("[data-dashboard-link]").forEach((link) => {
-      link.setAttribute("href", rentsihoDemoLoginUrl);
+      link.setAttribute("href", rentsihoLoginUrl);
 
       link.addEventListener("click", (event) => {
         event.preventDefault();
@@ -3370,30 +3024,11 @@
           dashboardLoading.setAttribute("aria-hidden", "false");
         }
 
-        window.location.href = rentsihoDemoLoginUrl;
+        window.location.href = rentsihoLoginUrl;
       });
     });
 
-    // Dashboard sidebar tabs.
-    document.querySelectorAll("[data-demo-panel]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const panelName = button.getAttribute("data-demo-panel");
-
-        document.querySelectorAll("[data-demo-panel]").forEach((item) => {
-          item.classList.toggle("active", item === button);
-        });
-
-        document.querySelectorAll(".demo-panel-section").forEach((panel) => {
-          panel.classList.toggle("active", panel.id === `demo-panel-${panelName}`);
-        });
-      });
-    });
-
-    // ============================================================
-    // YEAR
-    // ============================================================
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+</script>
 
 </body>
 </html>
