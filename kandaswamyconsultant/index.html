@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#0B1B29" />
   <meta
     name="description"
-    content="Kandaswamy Consultant - property, building and real-estate consultation."
+    content="Kandaswamy Consultant - website development, web application development, Azure App Service deployment, hosting, maintenance and technical support."
   />
 
-  <title>Kandaswamy Consultant | Rentsiho</title>
+  <title>Kandaswamy Consultant | Web & App Services</title>
 
   <style>
     :root {
@@ -32,9 +32,6 @@
       --shadow-md: 0 18px 48px rgba(22, 27, 55, 0.12);
       --shadow-lg: 0 25px 80px rgba(22, 27, 55, 0.16);
 
-      --radius-sm: 14px;
-      --radius-md: 22px;
-      --radius-lg: 32px;
       --container: 1180px;
     }
 
@@ -90,7 +87,7 @@
     .section-dark {
       color: var(--white);
       background:
-        radial-gradient(circle at 10% 15%, rgba(212,167,44,.20), transparent 30%),
+        radial-gradient(circle at 12% 18%, rgba(212,167,44,.20), transparent 30%),
         linear-gradient(135deg, var(--navy), var(--navy-dark));
     }
 
@@ -153,7 +150,7 @@
       gap: 10px;
       font-weight: 900;
       cursor: pointer;
-      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+      transition: transform .25s ease, box-shadow .25s ease;
     }
 
     .btn:hover {
@@ -231,7 +228,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 27px;
+      gap: 26px;
     }
 
     .nav-links a {
@@ -353,7 +350,7 @@
     .hero-copy h1 {
       margin: 22px 0 24px;
       color: var(--navy);
-      font-size: clamp(48px, 6.4vw, 80px);
+      font-size: clamp(48px, 6.3vw, 80px);
       line-height: .98;
       letter-spacing: -3px;
     }
@@ -363,7 +360,7 @@
     }
 
     .hero-copy p {
-      max-width: 650px;
+      max-width: 660px;
       color: var(--muted);
       font-size: 19px;
       line-height: 1.85;
@@ -409,46 +406,169 @@
       min-height: 610px;
     }
 
-    .hero-building {
+    .browser-window {
       position: absolute;
-      inset: 15px 0 15px 35px;
-      overflow: hidden;
-      border-radius: 30px;
-      background:
-        linear-gradient(180deg, rgba(7,19,30,.02), rgba(7,19,30,.34)),
-        url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1500&q=88");
-      background-size: cover;
-      background-position: center;
+      inset: 20px 0 20px 30px;
+      padding: 16px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.95);
       box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(14px);
     }
 
-    .hero-card {
-      position: absolute;
-      z-index: 2;
-      left: -8px;
-      bottom: 58px;
-      max-width: 260px;
-      padding: 20px;
-      border-radius: 18px;
+    .browser-inner {
+      height: 100%;
+      overflow: hidden;
+      border-radius: 21px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .browser-top {
+      height: 55px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FBFBFD;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .browser-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #D5D7DE;
+    }
+
+    .browser-url {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .demo-app {
+      min-height: 475px;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+    }
+
+    .demo-sidebar {
+      padding: 22px 13px;
+      background: linear-gradient(180deg, var(--navy), var(--navy-dark));
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .demo-logo {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 12px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
       color: var(--white);
-      background: rgba(11,27,41,.92);
-      border: 1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(12px);
+      background: var(--gold);
+      font-weight: 900;
+    }
+
+    .demo-line {
+      height: 9px;
+      border-radius: 99px;
+      background: rgba(255,255,255,.14);
+    }
+
+    .demo-line.active {
+      background: rgba(240,200,90,.85);
+    }
+
+    .demo-content {
+      padding: 25px;
+      background: #FCFCFD;
+    }
+
+    .demo-content h3 {
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .demo-content p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .demo-stats {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .demo-card {
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .demo-card small {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .demo-card strong {
+      display: block;
+      margin-top: 5px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    .code-panel {
+      margin-top: 15px;
+      padding: 18px;
+      border-radius: 16px;
+      color: #E8EDF2;
+      background: #111820;
+      font-family: Consolas, monospace;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .code-panel .gold {
+      color: #F0C85A;
+    }
+
+    .floating-tech {
+      position: absolute;
+      z-index: 3;
+      right: -28px;
+      top: 72px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-md);
     }
 
-    .hero-card strong {
+    .floating-tech strong {
       display: block;
-      color: #F3D985;
-      font-size: 18px;
+      color: var(--navy);
+      font-size: 15px;
     }
 
-    .hero-card span {
-      display: block;
-      margin-top: 7px;
-      color: rgba(255,255,255,.72);
-      font-size: 13px;
-      line-height: 1.6;
+    .floating-tech span {
+      color: var(--muted);
+      font-size: 12px;
     }
 
     /* About */
@@ -456,8 +576,8 @@
     .about-grid {
       display: grid;
       grid-template-columns: .94fr 1.06fr;
-      align-items: center;
       gap: 68px;
+      align-items: center;
     }
 
     .about-visual {
@@ -466,8 +586,8 @@
       overflow: hidden;
       border-radius: 30px;
       background:
-        linear-gradient(180deg, rgba(11,27,41,.03), rgba(11,27,41,.30)),
-        url("https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=88");
+        linear-gradient(180deg, rgba(11,27,41,.04), rgba(11,27,41,.50)),
+        url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=88");
       background-size: cover;
       background-position: center;
       box-shadow: var(--shadow-lg);
@@ -476,12 +596,13 @@
     .about-badge {
       position: absolute;
       left: 25px;
+      right: 25px;
       bottom: 25px;
-      max-width: 280px;
+      max-width: 340px;
       padding: 20px;
       border-radius: 18px;
       color: var(--white);
-      background: rgba(11,27,41,.90);
+      background: rgba(11,27,41,.92);
       border: 1px solid rgba(255,255,255,.14);
     }
 
@@ -595,70 +716,88 @@
       line-height: 1.75;
     }
 
-    /* Projects */
-
-    .project-grid {
+    .service-list {
+      margin-top: 18px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+      gap: 8px;
     }
 
-    .project-card {
-      overflow: hidden;
-      border-radius: 22px;
-      background: var(--white);
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 34px rgba(20,24,48,.06);
-      transition: transform .25s ease, box-shadow .25s ease;
+    .service-list span {
+      color: #555D65;
+      font-size: 13px;
+      font-weight: 700;
     }
 
-    .project-card:hover {
-      transform: translateY(-7px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .project-image {
-      height: 250px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-    }
-
-    .project-image.one {
-      background-image: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=86");
-    }
-
-    .project-image.two {
-      background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=86");
-    }
-
-    .project-image.three {
-      background-image: url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=86");
-    }
-
-    .project-label {
-      position: absolute;
-      left: 16px;
-      top: 16px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      color: #4F3A1C;
-      background: rgba(255,248,231,.96);
-      font-size: 11px;
+    .service-list span::before {
+      content: "✓";
+      margin-right: 8px;
+      color: var(--gold-dark);
       font-weight: 900;
     }
 
-    .project-body {
-      padding: 23px;
+    /* Technology */
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
     }
 
-    .project-body h3 {
+    .tech-card {
+      min-height: 130px;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .tech-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #F3D985;
+      font-size: 17px;
+    }
+
+    .tech-card span {
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    /* Process */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 0 15px;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      box-shadow: 0 13px 28px rgba(212,167,44,.28);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .step-card h3 {
+      margin-bottom: 8px;
       color: var(--navy);
-      font-size: 21px;
+      font-size: 19px;
     }
 
-    .project-body p {
-      margin-top: 8px;
+    .step-card p {
       color: var(--muted);
       font-size: 14px;
       line-height: 1.7;
@@ -711,45 +850,6 @@
       color: rgba(255,255,255,.68);
       font-size: 13px;
       line-height: 1.65;
-    }
-
-    /* Process */
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-
-    .step-card {
-      text-align: center;
-      padding: 0 15px;
-    }
-
-    .step-number {
-      width: 60px;
-      height: 60px;
-      margin: 0 auto 20px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      color: var(--white);
-      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
-      box-shadow: 0 13px 28px rgba(212,167,44,.28);
-      font-size: 18px;
-      font-weight: 900;
-    }
-
-    .step-card h3 {
-      margin-bottom: 8px;
-      color: var(--navy);
-      font-size: 19px;
-    }
-
-    .step-card p {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.7;
     }
 
     /* Contact */
@@ -844,8 +944,8 @@
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(7,19,30,.02), rgba(7,19,30,.58)),
-        url("https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1400&q=88");
+        linear-gradient(180deg, rgba(7,19,30,.02), rgba(7,19,30,.64)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=88");
       background-size: cover;
       background-position: center;
     }
@@ -858,9 +958,8 @@
       padding: 25px;
       border-radius: 20px;
       color: var(--white);
-      background: rgba(11,27,41,.90);
+      background: rgba(11,27,41,.92);
       border: 1px solid rgba(255,255,255,.14);
-      backdrop-filter: blur(12px);
     }
 
     .contact-overlay h3 {
@@ -1003,8 +1102,11 @@
         max-width: 780px;
       }
 
-      .services-grid,
-      .project-grid {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tech-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -1096,22 +1198,31 @@
       }
 
       .hero-visual {
-        min-height: 470px;
+        min-height: 500px;
       }
 
-      .hero-building {
+      .browser-window {
         inset: 10px 0;
       }
 
-      .hero-card {
-        left: 18px;
-        right: 18px;
-        bottom: 28px;
-        max-width: none;
+      .floating-tech {
+        display: none;
+      }
+
+      .demo-app {
+        grid-template-columns: 65px 1fr;
+      }
+
+      .demo-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-card:nth-child(3) {
+        display: none;
       }
 
       .services-grid,
-      .project-grid,
+      .tech-grid,
       .steps {
         grid-template-columns: 1fr;
       }
@@ -1154,9 +1265,10 @@
     <a class="brand" href="/">
       <img src="/rentsiho-logo.png" alt="Rentsiho" />
       <span class="brand-divider"></span>
+
       <span class="brand-copy">
         <strong>Kandaswamy Consultant</strong>
-        <small>Property & Building Consultancy</small>
+        <small>Web & Cloud Solutions</small>
       </span>
     </a>
 
@@ -1164,13 +1276,13 @@
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#projects">Projects</a>
-      <a href="#process">How It Works</a>
+      <a href="#technology">Technology</a>
+      <a href="#process">Process</a>
       <a href="#contact">Contact</a>
     </nav>
 
     <div class="nav-actions">
-      <a class="nav-cta" href="#contact">Get Consultation</a>
+      <a class="nav-cta" href="#contact">Start a Project</a>
 
       <button
         class="menu-button"
@@ -1187,71 +1299,129 @@
 
 <main>
 
+  <!-- HERO -->
   <section class="hero" id="home">
     <div class="container hero-grid">
 
       <div class="hero-copy reveal">
-        <div class="hero-badge">Kandaswamy Consultant</div>
+        <div class="hero-badge">Kandaswamy Consultant • Web & Cloud Services</div>
 
         <h1>
-          Property guidance for
-          <span>better decisions.</span>
+          Build, deploy and grow your
+          <span>digital business.</span>
         </h1>
 
         <p>
-          Kandaswamy Consultant provides property and building consultation
-          for residential, commercial and investment requirements. We focus on
-          understanding your needs clearly and helping you explore suitable
-          property opportunities with confidence.
+          Kandaswamy Consultant provides website development, web application
+          development, Azure App Service deployment, cloud hosting setup,
+          domain configuration, maintenance and technical support for businesses
+          that need reliable digital solutions.
         </p>
 
         <div class="hero-actions">
-          <a href="#contact" class="btn btn-gold">Get Consultation →</a>
-          <a href="#projects" class="btn btn-white">Explore Services</a>
+          <a href="#contact" class="btn btn-gold">Start Your Project →</a>
+          <a href="#services" class="btn btn-white">Explore Services</a>
         </div>
 
         <div class="hero-points">
           <div class="hero-point">
             <span class="check-dot">✓</span>
-            Residential consultation
+            Website Development
           </div>
 
           <div class="hero-point">
             <span class="check-dot">✓</span>
-            Commercial consultation
+            Azure App Service
           </div>
 
           <div class="hero-point">
             <span class="check-dot">✓</span>
-            Property guidance
+            Deployment & Support
           </div>
         </div>
       </div>
 
       <div class="hero-visual reveal">
-        <div class="hero-building"></div>
 
-        <div class="hero-card">
-          <strong>Kandaswamy Consultant</strong>
-          <span>
-            Professional support for property search, building requirements,
-            commercial spaces and real-estate consultation.
-          </span>
+        <div class="browser-window">
+          <div class="browser-inner">
+
+            <div class="browser-top">
+              <div class="browser-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div class="browser-url">your-business.com</div>
+            </div>
+
+            <div class="demo-app">
+
+              <div class="demo-sidebar">
+                <div class="demo-logo">KC</div>
+                <div class="demo-line active"></div>
+                <div class="demo-line"></div>
+                <div class="demo-line"></div>
+                <div class="demo-line"></div>
+              </div>
+
+              <div class="demo-content">
+                <h3>Business Web Application</h3>
+                <p>Modern • Responsive • Cloud Ready</p>
+
+                <div class="demo-stats">
+                  <div class="demo-card">
+                    <small>Website</small>
+                    <strong>Live</strong>
+                  </div>
+
+                  <div class="demo-card">
+                    <small>Cloud</small>
+                    <strong>Azure</strong>
+                  </div>
+
+                  <div class="demo-card">
+                    <small>Status</small>
+                    <strong>Secure</strong>
+                  </div>
+                </div>
+
+                <div class="code-panel">
+                  <div><span class="gold">const</span> project = {</div>
+                  <div>&nbsp;&nbsp;design: "responsive",</div>
+                  <div>&nbsp;&nbsp;hosting: "azure",</div>
+                  <div>&nbsp;&nbsp;domain: "configured",</div>
+                  <div>&nbsp;&nbsp;support: true</div>
+                  <div>};</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
+
+        <div class="floating-tech">
+          <strong>Azure App Service</strong>
+          <span>Deployment • Hosting • SSL</span>
+        </div>
+
       </div>
 
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section class="section" id="about">
     <div class="container about-grid">
 
       <div class="about-visual reveal">
         <div class="about-badge">
-          <strong>Property consultation made clear.</strong>
+          <strong>From idea to live website.</strong>
           <span>
-            Practical guidance for residential, commercial and property
-            investment requirements.
+            Design, development, deployment and ongoing technical support from
+            one place.
           </span>
         </div>
       </div>
@@ -1259,18 +1429,19 @@
       <div class="about-copy reveal">
         <div class="kicker">About Kandaswamy Consultant</div>
 
-        <h2>Helping you understand the right property opportunity</h2>
+        <h2>Digital solutions for businesses that want to move online</h2>
 
         <p>
-          Kandaswamy Consultant supports customers who are looking for
-          residential properties, commercial spaces, building opportunities
-          and property consultation.
+          Kandaswamy Consultant helps businesses create professional websites
+          and web applications, deploy them to cloud platforms and keep them
+          running reliably.
         </p>
 
         <p>
-          Our approach starts by understanding what you actually need. We then
-          help you review suitable options, understand the property and move
-          toward a better-informed decision.
+          Whether you need a simple company website, a business dashboard,
+          custom web application or Azure App Service deployment, the goal is
+          to provide a clear development process and a practical solution that
+          fits your business.
         </p>
 
         <div class="check-list">
@@ -1278,10 +1449,10 @@
           <div class="check-row">
             <div class="check-box">✓</div>
             <div>
-              <strong>Residential Property Consultation</strong>
+              <strong>Website & Web Application Development</strong>
               <span>
-                Guidance for apartments, villas, houses and residential
-                property requirements.
+                Responsive business websites, landing pages, portals and custom
+                web applications.
               </span>
             </div>
           </div>
@@ -1289,9 +1460,10 @@
           <div class="check-row">
             <div class="check-box">✓</div>
             <div>
-              <strong>Commercial Property Consultation</strong>
+              <strong>Azure Deployment & Cloud Setup</strong>
               <span>
-                Assistance for offices, commercial units and business spaces.
+                App Service deployment, configuration, custom domain and HTTPS
+                setup.
               </span>
             </div>
           </div>
@@ -1299,10 +1471,10 @@
           <div class="check-row">
             <div class="check-box">✓</div>
             <div>
-              <strong>Building & Property Guidance</strong>
+              <strong>Maintenance & Technical Support</strong>
               <span>
-                Support in understanding available options based on your
-                location and requirement.
+                Updates, bug fixes, deployment assistance and ongoing website
+                support.
               </span>
             </div>
           </div>
@@ -1313,15 +1485,20 @@
     </div>
   </section>
 
+  <!-- SERVICES -->
   <section class="section section-soft" id="services">
     <div class="container">
 
       <div class="section-heading reveal">
         <div class="kicker">Our Services</div>
-        <h2 class="section-title">Kandaswamy Consultant property services</h2>
+
+        <h2 class="section-title">
+          Complete website, application and cloud services
+        </h2>
+
         <p class="section-description">
-          Clear and practical consultation for different types of property
-          requirements.
+          Choose a single service or combine development, deployment and
+          maintenance as one complete project.
         </p>
       </div>
 
@@ -1329,185 +1506,255 @@
 
         <article class="service-card reveal">
           <div class="service-icon">01</div>
-          <h3>Property Consultation</h3>
+          <h3>Website Development</h3>
+
           <p>
-            Discuss your property requirement and receive guidance on suitable
-            options and next steps.
+            Professional responsive websites designed for businesses, services,
+            products and organisations.
           </p>
+
+          <div class="service-list">
+            <span>Business websites</span>
+            <span>Landing pages</span>
+            <span>Mobile responsive design</span>
+            <span>Contact & enquiry pages</span>
+          </div>
         </article>
 
         <article class="service-card reveal">
           <div class="service-icon">02</div>
-          <h3>Residential Properties</h3>
+          <h3>Web Application Development</h3>
+
           <p>
-            Consultation for apartments, houses, villas and residential
-            property opportunities.
+            Custom web applications and dashboards built around your business
+            workflow and requirements.
           </p>
+
+          <div class="service-list">
+            <span>Admin dashboards</span>
+            <span>Customer portals</span>
+            <span>API integration</span>
+            <span>Database applications</span>
+          </div>
         </article>
 
         <article class="service-card reveal">
           <div class="service-icon">03</div>
-          <h3>Commercial Properties</h3>
+          <h3>Azure App Service</h3>
+
           <p>
-            Assistance for offices, business premises and other commercial
-            property requirements.
+            Deploy your web application to Microsoft Azure App Service and
+            configure it for production use.
           </p>
+
+          <div class="service-list">
+            <span>App Service deployment</span>
+            <span>Environment configuration</span>
+            <span>Custom domain setup</span>
+            <span>HTTPS / SSL configuration</span>
+          </div>
         </article>
 
         <article class="service-card reveal">
           <div class="service-icon">04</div>
-          <h3>Building Consultation</h3>
+          <h3>Domain & Hosting Setup</h3>
+
           <p>
-            Discuss building-related property needs and receive structured
-            guidance based on your requirement.
+            Assistance connecting your domain and hosting environment so your
+            website is accessible using your professional web address.
           </p>
+
+          <div class="service-list">
+            <span>Domain connection</span>
+            <span>DNS configuration</span>
+            <span>GitHub Pages setup</span>
+            <span>Cloud hosting setup</span>
+          </div>
         </article>
 
         <article class="service-card reveal">
           <div class="service-icon">05</div>
-          <h3>Location Guidance</h3>
+          <h3>UI / Website Redesign</h3>
+
           <p>
-            Compare locations and understand factors that may matter for your
-            residential or commercial requirement.
+            Improve an existing website or application with a cleaner,
+            responsive and more professional interface.
           </p>
+
+          <div class="service-list">
+            <span>Modern UI redesign</span>
+            <span>Responsive layout</span>
+            <span>Brand colour integration</span>
+            <span>Usability improvements</span>
+          </div>
         </article>
 
         <article class="service-card reveal">
           <div class="service-icon">06</div>
-          <h3>Property Requirement Support</h3>
+          <h3>Maintenance & Support</h3>
+
           <p>
-            Tell us what you are looking for and Kandaswamy Consultant can help
-            you organise and evaluate the available choices.
+            Technical assistance after launch to keep your site updated and
+            resolve application or deployment issues.
           </p>
+
+          <div class="service-list">
+            <span>Bug fixing</span>
+            <span>Content updates</span>
+            <span>Deployment support</span>
+            <span>Performance checks</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">07</div>
+          <h3>API Integration</h3>
+
+          <p>
+            Connect your frontend application to backend APIs and external
+            services securely and reliably.
+          </p>
+
+          <div class="service-list">
+            <span>REST API integration</span>
+            <span>Authentication flows</span>
+            <span>JSON data handling</span>
+            <span>Error handling</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">08</div>
+          <h3>Flutter Web Support</h3>
+
+          <p>
+            Support for Flutter web applications including UI development,
+            API integration and deployment.
+          </p>
+
+          <div class="service-list">
+            <span>Flutter web UI</span>
+            <span>GetX integration</span>
+            <span>API connection</span>
+            <span>Web deployment</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">09</div>
+          <h3>Technical Consultation</h3>
+
+          <p>
+            Discuss your software requirement and get help choosing a practical
+            technical approach for development and deployment.
+          </p>
+
+          <div class="service-list">
+            <span>Project planning</span>
+            <span>Technology guidance</span>
+            <span>Hosting guidance</span>
+            <span>Deployment planning</span>
+          </div>
         </article>
 
       </div>
     </div>
   </section>
 
-  <section class="section" id="projects">
+  <!-- TECHNOLOGY -->
+  <section class="section section-dark" id="technology">
     <div class="container">
 
       <div class="section-heading reveal">
-        <div class="kicker">Property Categories</div>
-        <h2 class="section-title">Explore the type of property you need</h2>
+        <div class="kicker">Technology & Platforms</div>
+
+        <h2 class="section-title">
+          Modern tools for practical web solutions
+        </h2>
+
         <p class="section-description">
-          These categories can later be updated with your actual properties,
-          project names, photographs and locations.
+          Technologies can be selected based on your project requirements,
+          hosting environment and existing system.
         </p>
       </div>
 
-      <div class="project-grid">
+      <div class="tech-grid">
 
-        <article class="project-card reveal">
-          <div class="project-image one">
-            <span class="project-label">Residential</span>
-          </div>
+        <div class="tech-card reveal">
+          <strong>Microsoft Azure</strong>
+          <span>
+            Azure App Service, web hosting, deployment and production
+            configuration.
+          </span>
+        </div>
 
-          <div class="project-body">
-            <h3>Residential Properties</h3>
-            <p>
-              Apartments, independent houses, villas and other residential
-              opportunities based on your requirement.
-            </p>
-          </div>
-        </article>
+        <div class="tech-card reveal">
+          <strong>Flutter Web</strong>
+          <span>
+            Responsive web dashboards and business applications using Flutter.
+          </span>
+        </div>
 
-        <article class="project-card reveal">
-          <div class="project-image two">
-            <span class="project-label">Building</span>
-          </div>
+        <div class="tech-card reveal">
+          <strong>HTML / CSS / JavaScript</strong>
+          <span>
+            Fast, responsive company websites and landing pages.
+          </span>
+        </div>
 
-          <div class="project-body">
-            <h3>Building Opportunities</h3>
-            <p>
-              Building and property consultation for customers looking for
-              suitable spaces and project opportunities.
-            </p>
-          </div>
-        </article>
+        <div class="tech-card reveal">
+          <strong>.NET & REST APIs</strong>
+          <span>
+            Backend API integration and business application connectivity.
+          </span>
+        </div>
 
-        <article class="project-card reveal">
-          <div class="project-image three">
-            <span class="project-label">Commercial</span>
-          </div>
+        <div class="tech-card reveal">
+          <strong>GitHub</strong>
+          <span>
+            Source control, GitHub Pages and deployment workflow support.
+          </span>
+        </div>
 
-          <div class="project-body">
-            <h3>Commercial Properties</h3>
-            <p>
-              Offices and commercial property consultation for business and
-              professional requirements.
-            </p>
-          </div>
-        </article>
+        <div class="tech-card reveal">
+          <strong>Custom Domains</strong>
+          <span>
+            Domain mapping, DNS records and HTTPS configuration.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>Responsive UI</strong>
+          <span>
+            Desktop, tablet and mobile-friendly design for modern browsers.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>Maintenance</strong>
+          <span>
+            Post-launch changes, bug fixing, deployment and technical support.
+          </span>
+        </div>
 
       </div>
     </div>
   </section>
 
-  <section class="section section-dark">
-    <div class="container why-grid">
-
-      <div class="why-copy reveal">
-        <div class="kicker">Why Kandaswamy Consultant</div>
-
-        <h2>Simple, clear and customer-focused property consultation</h2>
-
-        <p>
-          We keep the consultation process understandable. The goal is to help
-          you communicate your requirement clearly, review relevant options and
-          make a more informed property decision.
-        </p>
-      </div>
-
-      <div class="why-list">
-
-        <div class="why-card reveal">
-          <strong>Requirement First</strong>
-          <span>
-            We begin by understanding what type of property or building you are
-            actually looking for.
-          </span>
-        </div>
-
-        <div class="why-card reveal">
-          <strong>Clear Communication</strong>
-          <span>
-            Property information is presented in a simple and understandable
-            way.
-          </span>
-        </div>
-
-        <div class="why-card reveal">
-          <strong>Residential & Commercial</strong>
-          <span>
-            Consultation can support different property categories based on the
-            customer's requirement.
-          </span>
-        </div>
-
-        <div class="why-card reveal">
-          <strong>Personal Guidance</strong>
-          <span>
-            Discuss the available options directly and decide what fits your
-            needs best.
-          </span>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
+  <!-- PROCESS -->
   <section class="section section-soft" id="process">
     <div class="container">
 
       <div class="section-heading reveal">
-        <div class="kicker">How It Works</div>
-        <h2 class="section-title">A simple consultation process</h2>
+        <div class="kicker">How We Work</div>
+
+        <h2 class="section-title">
+          From your requirement to a live website
+        </h2>
+
         <p class="section-description">
-          Start with your requirement and move through the property selection
-          process step by step.
+          A simple development process that keeps the project understandable
+          from planning through deployment.
         </p>
       </div>
 
@@ -1515,37 +1762,44 @@
 
         <div class="step-card reveal">
           <div class="step-number">01</div>
-          <h3>Share Your Requirement</h3>
+
+          <h3>Discuss Requirement</h3>
+
           <p>
-            Tell Kandaswamy Consultant the property type, location and basic
-            requirement.
+            Share your website, application, hosting or deployment requirement.
           </p>
         </div>
 
         <div class="step-card reveal">
           <div class="step-number">02</div>
-          <h3>Discuss Options</h3>
+
+          <h3>Plan & Design</h3>
+
           <p>
-            Review the types of properties or building opportunities that may
-            suit your requirement.
+            Define pages, functionality, design style and the technical
+            approach.
           </p>
         </div>
 
         <div class="step-card reveal">
           <div class="step-number">03</div>
-          <h3>Understand Details</h3>
+
+          <h3>Develop & Test</h3>
+
           <p>
-            Discuss the relevant property information and clarify important
-            questions.
+            Build the website or application and verify its main functionality
+            and responsive layout.
           </p>
         </div>
 
         <div class="step-card reveal">
           <div class="step-number">04</div>
-          <h3>Choose Your Next Step</h3>
+
+          <h3>Deploy & Support</h3>
+
           <p>
-            Decide how you want to proceed after reviewing the available
-            information.
+            Publish the project, connect the domain and provide post-deployment
+            support.
           </p>
         </div>
 
@@ -1553,71 +1807,141 @@
     </div>
   </section>
 
+  <!-- WHY -->
+  <section class="section section-dark">
+    <div class="container why-grid">
+
+      <div class="why-copy reveal">
+        <div class="kicker">Why Kandaswamy Consultant</div>
+
+        <h2>
+          Development and deployment support in one place
+        </h2>
+
+        <p>
+          Instead of handling website development, hosting and deployment
+          separately, you can manage the complete technical process through one
+          service—from building the application to publishing it on your domain.
+        </p>
+      </div>
+
+      <div class="why-list">
+
+        <div class="why-card reveal">
+          <strong>Business-Focused Solutions</strong>
+
+          <span>
+            Development starts from your actual business requirement rather
+            than unnecessary features.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Responsive Design</strong>
+
+          <span>
+            Websites and web applications designed to work across desktop,
+            tablet and mobile screens.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Cloud Deployment</strong>
+
+          <span>
+            Support for publishing websites and applications using platforms
+            such as Azure and GitHub Pages.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Ongoing Technical Support</strong>
+
+          <span>
+            Assistance with deployment errors, updates, bug fixes and future
+            changes.
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
   <section class="section" id="contact">
     <div class="container">
 
       <div class="section-heading reveal">
         <div class="kicker">Contact Kandaswamy Consultant</div>
-        <h2 class="section-title">Tell us what property you are looking for</h2>
+
+        <h2 class="section-title">
+          Have a website or web application project?
+        </h2>
+
         <p class="section-description">
-          Replace the sample phone, WhatsApp and email below with your actual
-          Kandaswamy Consultant contact details before publishing.
+          Share your requirement for website development, application
+          development, Azure deployment or technical support.
         </p>
       </div>
 
       <div class="contact-grid">
 
         <div class="contact-card reveal">
-          <h3>Kandaswamy Consultant</h3>
+          <h3>Start your project</h3>
 
           <p>
-            Contact us for residential, commercial, building and property
-            consultation.
+            Replace the sample phone number, WhatsApp number and email below
+            with your actual Kandaswamy Consultant contact information.
           </p>
 
           <div class="contact-list">
 
-            <!-- CHANGE THIS PHONE NUMBER -->
+            <!-- CHANGE PHONE NUMBER -->
             <a href="tel:+919999999999" class="contact-link">
               <div class="contact-icon">☎</div>
+
               <div class="contact-copy">
-                <strong>Call Kandaswamy Consultant</strong>
+                <strong>Call</strong>
                 <small>+91 99999 99999</small>
               </div>
             </a>
 
-            <!-- CHANGE THIS WHATSAPP NUMBER -->
+            <!-- CHANGE WHATSAPP NUMBER -->
             <a
-              href="https://wa.me/919999999999?text=Hello%20Kandaswamy%20Consultant%2C%20I%20would%20like%20to%20discuss%20a%20property%20requirement."
+              href="https://wa.me/919999999999?text=Hello%20Kandaswamy%20Consultant%2C%20I%20would%20like%20to%20discuss%20a%20website%20or%20web%20application%20project."
               target="_blank"
               rel="noopener"
               class="contact-link"
             >
               <div class="contact-icon">W</div>
+
               <div class="contact-copy">
                 <strong>WhatsApp</strong>
-                <small>Chat about your property requirement</small>
+                <small>Discuss your website or application requirement</small>
               </div>
             </a>
 
-            <!-- CHANGE THIS EMAIL -->
+            <!-- CHANGE EMAIL -->
             <a
               href="mailto:kandaswamyconsultant@example.com"
               class="contact-link"
             >
               <div class="contact-icon">✉</div>
+
               <div class="contact-copy">
                 <strong>Email</strong>
                 <small>kandaswamyconsultant@example.com</small>
               </div>
             </a>
 
-            <!-- CHANGE THIS LOCATION -->
+            <!-- CHANGE LOCATION -->
             <div class="contact-link">
               <div class="contact-icon">⌖</div>
+
               <div class="contact-copy">
                 <strong>Location</strong>
-                <small>Tamil Nadu, India</small>
+                <small>India</small>
               </div>
             </div>
 
@@ -1626,24 +1950,29 @@
 
         <div class="contact-image reveal">
           <div class="contact-overlay">
-            <h3>Talk to Kandaswamy Consultant</h3>
+
+            <h3>Let's build your digital solution</h3>
 
             <p>
-              Share your residential, commercial or building property
-              requirement and discuss the next step.
+              Website development, web application development, Azure App
+              Service deployment, custom domain setup and ongoing support.
             </p>
 
             <div class="contact-buttons">
-              <a href="tel:+919999999999" class="btn btn-gold">Call Now</a>
+
+              <a href="tel:+919999999999" class="btn btn-gold">
+                Call Now
+              </a>
 
               <a
-                href="https://wa.me/919999999999?text=Hello%20Kandaswamy%20Consultant%2C%20I%20would%20like%20to%20discuss%20a%20property%20requirement."
+                href="https://wa.me/919999999999?text=Hello%20Kandaswamy%20Consultant%2C%20I%20would%20like%20to%20discuss%20a%20website%20or%20web%20application%20project."
                 target="_blank"
                 rel="noopener"
                 class="btn btn-white"
               >
                 WhatsApp
               </a>
+
             </div>
           </div>
         </div>
@@ -1653,18 +1982,27 @@
     </div>
   </section>
 
+  <!-- CTA -->
   <section class="cta">
     <div class="container">
+
       <div class="cta-card reveal">
-        <h2>Looking for property or building consultation?</h2>
+
+        <h2>
+          Ready to build or deploy your website?
+        </h2>
 
         <p>
-          Contact Kandaswamy Consultant and discuss your residential,
-          commercial or property requirement.
+          Contact Kandaswamy Consultant for website development, web application
+          development, Azure deployment and technical support.
         </p>
 
-        <a href="#contact" class="btn btn-white">Contact Kandaswamy Consultant →</a>
+        <a href="#contact" class="btn btn-white">
+          Start a Project →
+        </a>
+
       </div>
+
     </div>
   </section>
 
@@ -1683,25 +2021,29 @@
         <h3>Kandaswamy Consultant</h3>
 
         <p>
-          Property and building consultation for residential, commercial and
-          related real-estate requirements.
+          Website development, web applications, Azure App Service deployment,
+          hosting setup, domain configuration and technical support.
         </p>
       </div>
 
       <div>
-        <div class="footer-title">Kandaswamy Consultant</div>
+        <div class="footer-title">Services</div>
+
         <div class="footer-links">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#projects">Property Categories</a>
-          <a href="#process">How It Works</a>
+          <a href="#services">Website Development</a>
+          <a href="#services">Web Applications</a>
+          <a href="#services">Azure App Service</a>
+          <a href="#services">Maintenance</a>
         </div>
       </div>
 
       <div>
         <div class="footer-title">Quick Links</div>
+
         <div class="footer-links">
-          <a href="#home">Home</a>
+          <a href="#about">About</a>
+          <a href="#technology">Technology</a>
+          <a href="#process">Process</a>
           <a href="#contact">Contact</a>
           <a href="/">Rentsiho Home</a>
         </div>
@@ -1709,12 +2051,15 @@
 
       <div>
         <div class="footer-title">Contact</div>
+
         <div class="footer-links">
           <a href="tel:+919999999999">+91 99999 99999</a>
+
           <a href="mailto:kandaswamyconsultant@example.com">
             kandaswamyconsultant@example.com
           </a>
-          <span>Tamil Nadu, India</span>
+
+          <span>India</span>
         </div>
       </div>
 
@@ -1740,6 +2085,7 @@
 
     menuButton.classList.toggle("active", isOpen);
     menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
     document.body.classList.toggle("menu-open", isOpen);
   });
 
@@ -1793,7 +2139,8 @@
     });
   });
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
 </script>
 
 </body>
