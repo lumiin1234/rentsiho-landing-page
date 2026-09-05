@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0B1B29" />
+  <meta
+    name="description"
+    content="Kandaswamy Consultant - property, building and real-estate consultation."
+  />
+
+  <title>Kandaswamy Consultant | Rentsiho</title>
+
+  <style>
+    :root {
+      --gold: #D4A72C;
+      --gold-dark: #A97912;
+      --gold-light: #F0C85A;
+      --gold-soft: #FBF3DF;
+
+      --navy: #0B1B29;
+      --navy-dark: #07131E;
+
+      --text: #2D3338;
+      --muted: #687078;
+
+      --white: #FFFFFF;
+      --page: #F7F5F0;
+      --border: #E6E0D4;
+
+      --shadow-sm: 0 10px 30px rgba(22, 27, 55, 0.08);
+      --shadow-md: 0 18px 48px rgba(22, 27, 55, 0.12);
+      --shadow-lg: 0 25px 80px rgba(22, 27, 55, 0.16);
+
+      --radius-sm: 14px;
+      --radius-md: 22px;
+      --radius-lg: 32px;
+      --container: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-soft {
+      background: var(--page);
+    }
+
+    .section-dark {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 10% 15%, rgba(212,167,44,.20), transparent 30%),
+        linear-gradient(135deg, var(--navy), var(--navy-dark));
+    }
+
+    .section-heading {
+      max-width: 790px;
+      margin: 0 auto 54px;
+      text-align: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+      color: var(--gold-dark);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 28px;
+      height: 3px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+
+    .section-title {
+      color: var(--navy);
+      font-size: clamp(34px, 4.5vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -1.6px;
+    }
+
+    .section-dark .section-title {
+      color: var(--white);
+    }
+
+    .section-description {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .section-dark .section-description {
+      color: rgba(255,255,255,.72);
+    }
+
+    .btn {
+      min-height: 54px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-gold {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      box-shadow: 0 16px 35px rgba(212,167,44,.30);
+    }
+
+    .btn-white {
+      color: var(--navy);
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    /* Header */
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(230,224,212,.9);
+    }
+
+    .nav {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 150px;
+      height: 58px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 34px;
+      background: var(--border);
+    }
+
+    .brand-copy strong {
+      display: block;
+      color: var(--navy);
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .brand-copy small {
+      display: block;
+      margin-top: 3px;
+      color: var(--gold-dark);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 27px;
+    }
+
+    .nav-links a {
+      color: #464B5E;
+      font-size: 14px;
+      font-weight: 800;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold-dark);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-cta {
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      background: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .menu-button {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      display: none;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .menu-button span,
+    .menu-button span::before,
+    .menu-button span::after {
+      width: 20px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--navy);
+      display: block;
+      position: relative;
+      transition: .25s ease;
+    }
+
+    .menu-button span::before,
+    .menu-button span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-button span::before { top: -6px; }
+    .menu-button span::after { top: 6px; }
+
+    .menu-button.active span { background: transparent; }
+    .menu-button.active span::before { top: 0; transform: rotate(45deg); }
+    .menu-button.active span::after { top: 0; transform: rotate(-45deg); }
+
+    /* Hero */
+
+    .hero {
+      min-height: 100vh;
+      padding: 145px 0 90px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(212,167,44,.20), transparent 26%),
+        radial-gradient(circle at 10% 88%, rgba(212,167,44,.10), transparent 25%),
+        linear-gradient(180deg, #FCFCFA 0%, #F4F1E9 100%);
+    }
+
+    .hero::before {
+      content: "";
+      width: 560px;
+      height: 560px;
+      position: absolute;
+      right: -260px;
+      top: 130px;
+      border-radius: 50%;
+      border: 90px solid rgba(212,167,44,.05);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: #745726;
+      background: #F5EDDC;
+      border: 1px solid #E9D9B8;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .hero-copy h1 {
+      margin: 22px 0 24px;
+      color: var(--navy);
+      font-size: clamp(48px, 6.4vw, 80px);
+      line-height: .98;
+      letter-spacing: -3px;
+    }
+
+    .hero-copy h1 span {
+      color: var(--gold);
+    }
+
+    .hero-copy p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.85;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-points {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: #585D70;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero-point {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .check-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #4F3A1C;
+      background: #F5EAD1;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 610px;
+    }
+
+    .hero-building {
+      position: absolute;
+      inset: 15px 0 15px 35px;
+      overflow: hidden;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(7,19,30,.02), rgba(7,19,30,.34)),
+        url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1500&q=88");
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero-card {
+      position: absolute;
+      z-index: 2;
+      left: -8px;
+      bottom: 58px;
+      max-width: 260px;
+      padding: 20px;
+      border-radius: 18px;
+      color: var(--white);
+      background: rgba(11,27,41,.92);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-card strong {
+      display: block;
+      color: #F3D985;
+      font-size: 18px;
+    }
+
+    .hero-card span {
+      display: block;
+      margin-top: 7px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* About */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .94fr 1.06fr;
+      align-items: center;
+      gap: 68px;
+    }
+
+    .about-visual {
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(11,27,41,.03), rgba(11,27,41,.30)),
+        url("https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1400&q=88");
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-badge {
+      position: absolute;
+      left: 25px;
+      bottom: 25px;
+      max-width: 280px;
+      padding: 20px;
+      border-radius: 18px;
+      color: var(--white);
+      background: rgba(11,27,41,.90);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .about-badge strong {
+      display: block;
+      color: #F3D985;
+      font-size: 18px;
+    }
+
+    .about-badge span {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+    }
+
+    .about-copy h2 {
+      margin: 14px 0 22px;
+      color: var(--navy);
+      font-size: clamp(36px, 4.6vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -1.8px;
+    }
+
+    .about-copy p {
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .check-list {
+      margin-top: 28px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .check-box {
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      color: #4F3A1C;
+      background: #F5EAD1;
+      font-weight: 900;
+    }
+
+    .check-row strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--navy);
+    }
+
+    .check-row span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Services */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      padding: 30px;
+      border-radius: 20px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 34px rgba(20,24,48,.05);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .service-icon {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 20px;
+      border-radius: 17px;
+      display: grid;
+      place-items: center;
+      color: var(--gold-dark);
+      background: var(--gold-soft);
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .service-card h3 {
+      margin-bottom: 9px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    /* Projects */
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .project-card {
+      overflow: hidden;
+      border-radius: 22px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 34px rgba(20,24,48,.06);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-image {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .project-image.one {
+      background-image: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=86");
+    }
+
+    .project-image.two {
+      background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=86");
+    }
+
+    .project-image.three {
+      background-image: url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=86");
+    }
+
+    .project-label {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: #4F3A1C;
+      background: rgba(255,248,231,.96);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .project-body {
+      padding: 23px;
+    }
+
+    .project-body h3 {
+      color: var(--navy);
+      font-size: 21px;
+    }
+
+    .project-body p {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* Why */
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .why-copy h2 {
+      margin: 14px 0 20px;
+      font-size: clamp(36px, 4.6vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -1.8px;
+    }
+
+    .why-copy p {
+      color: rgba(255,255,255,.72);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .why-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .why-card {
+      min-height: 150px;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .why-card strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #F3D985;
+      font-size: 16px;
+    }
+
+    .why-card span {
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    /* Process */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 0 15px;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      box-shadow: 0 13px 28px rgba(212,167,44,.28);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .step-card h3 {
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .step-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* Contact */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .contact-card,
+    .contact-image {
+      min-height: 520px;
+      border-radius: 26px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-card {
+      padding: 38px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(212,167,44,.08), transparent 28%),
+        var(--white);
+    }
+
+    .contact-card h3 {
+      margin-bottom: 12px;
+      color: var(--navy);
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .contact-card > p {
+      margin-bottom: 26px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .contact-link {
+      min-height: 72px;
+      padding: 14px 16px;
+      border-radius: 17px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--navy);
+      background: #FBFBFE;
+      border: 1px solid #E8E9F2;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-4px);
+      border-color: #E2CD8B;
+      box-shadow: 0 16px 38px rgba(40,34,86,.10);
+    }
+
+    .contact-icon {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      font-weight: 900;
+      font-size: 19px;
+    }
+
+    .contact-copy strong {
+      display: block;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .contact-copy small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .contact-image {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(7,19,30,.02), rgba(7,19,30,.58)),
+        url("https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1400&q=88");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .contact-overlay {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      padding: 25px;
+      border-radius: 20px;
+      color: var(--white);
+      background: rgba(11,27,41,.90);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(12px);
+    }
+
+    .contact-overlay h3 {
+      margin-bottom: 7px;
+      font-size: 25px;
+    }
+
+    .contact-overlay p {
+      color: rgba(255,255,255,.72);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .contact-buttons {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* CTA */
+
+    .cta {
+      padding: 90px 0;
+    }
+
+    .cta-card {
+      padding: 70px 40px;
+      border-radius: 30px;
+      text-align: center;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(255,255,255,.18), transparent 24%),
+        linear-gradient(135deg, var(--gold), #8D692D);
+      box-shadow: 0 28px 70px rgba(159,123,56,.28);
+    }
+
+    .cta-card h2 {
+      max-width: 820px;
+      margin: 0 auto;
+      font-size: clamp(35px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -1.8px;
+    }
+
+    .cta-card p {
+      max-width: 680px;
+      margin: 18px auto 28px;
+      color: rgba(255,255,255,.82);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* Footer */
+
+    .footer {
+      padding: 72px 0 26px;
+      color: rgba(255,255,255,.68);
+      background: #0D1C28;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, .7fr);
+      gap: 48px;
+    }
+
+    .footer-brand img {
+      width: 180px;
+      max-height: 90px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .footer-brand h3 {
+      margin-top: 15px;
+      color: var(--white);
+      font-size: 20px;
+    }
+
+    .footer-brand p {
+      max-width: 370px;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-title {
+      margin-bottom: 16px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-links a,
+    .footer-links span {
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-bottom {
+      margin-top: 48px;
+      padding-top: 23px;
+      border-top: 1px solid rgba(255,255,255,.09);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .about-grid,
+      .why-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        max-width: 780px;
+      }
+
+      .services-grid,
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .nav-links.mobile-open {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: 88px;
+        padding: 22px;
+        border-radius: 18px;
+        display: grid;
+        gap: 17px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .why-list {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 38px 20px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 26px, var(--container));
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .nav {
+        min-height: 70px;
+      }
+
+      .brand img {
+        width: 120px;
+        height: 50px;
+      }
+
+      .brand-divider,
+      .brand-copy {
+        display: none;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 110px;
+        padding-bottom: 80px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(42px, 13vw, 60px);
+        letter-spacing: -2px;
+      }
+
+      .hero-copy p {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 470px;
+      }
+
+      .hero-building {
+        inset: 10px 0;
+      }
+
+      .hero-card {
+        left: 18px;
+        right: 18px;
+        bottom: 28px;
+        max-width: none;
+      }
+
+      .services-grid,
+      .project-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        padding: 24px;
+      }
+
+      .contact-image {
+        min-height: 440px;
+      }
+
+      .contact-overlay {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+      }
+
+      .cta-card {
+        padding: 54px 22px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container nav">
+
+    <a class="brand" href="/">
+      <img src="/rentsiho-logo.png" alt="Rentsiho" />
+      <span class="brand-divider"></span>
+      <span class="brand-copy">
+        <strong>Kandaswamy Consultant</strong>
+        <small>Property & Building Consultancy</small>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#process">How It Works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="nav-cta" href="#contact">Get Consultation</a>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<main>
+
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+
+      <div class="hero-copy reveal">
+        <div class="hero-badge">Kandaswamy Consultant</div>
+
+        <h1>
+          Property guidance for
+          <span>better decisions.</span>
+        </h1>
+
+        <p>
+          Kandaswamy Consultant provides property and building consultation
+          for residential, commercial and investment requirements. We focus on
+          understanding your needs clearly and helping you explore suitable
+          property opportunities with confidence.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-gold">Get Consultation →</a>
+          <a href="#projects" class="btn btn-white">Explore Services</a>
+        </div>
+
+        <div class="hero-points">
+          <div class="hero-point">
+            <span class="check-dot">✓</span>
+            Residential consultation
+          </div>
+
+          <div class="hero-point">
+            <span class="check-dot">✓</span>
+            Commercial consultation
+          </div>
+
+          <div class="hero-point">
+            <span class="check-dot">✓</span>
+            Property guidance
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="hero-building"></div>
+
+        <div class="hero-card">
+          <strong>Kandaswamy Consultant</strong>
+          <span>
+            Professional support for property search, building requirements,
+            commercial spaces and real-estate consultation.
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container about-grid">
+
+      <div class="about-visual reveal">
+        <div class="about-badge">
+          <strong>Property consultation made clear.</strong>
+          <span>
+            Practical guidance for residential, commercial and property
+            investment requirements.
+          </span>
+        </div>
+      </div>
+
+      <div class="about-copy reveal">
+        <div class="kicker">About Kandaswamy Consultant</div>
+
+        <h2>Helping you understand the right property opportunity</h2>
+
+        <p>
+          Kandaswamy Consultant supports customers who are looking for
+          residential properties, commercial spaces, building opportunities
+          and property consultation.
+        </p>
+
+        <p>
+          Our approach starts by understanding what you actually need. We then
+          help you review suitable options, understand the property and move
+          toward a better-informed decision.
+        </p>
+
+        <div class="check-list">
+
+          <div class="check-row">
+            <div class="check-box">✓</div>
+            <div>
+              <strong>Residential Property Consultation</strong>
+              <span>
+                Guidance for apartments, villas, houses and residential
+                property requirements.
+              </span>
+            </div>
+          </div>
+
+          <div class="check-row">
+            <div class="check-box">✓</div>
+            <div>
+              <strong>Commercial Property Consultation</strong>
+              <span>
+                Assistance for offices, commercial units and business spaces.
+              </span>
+            </div>
+          </div>
+
+          <div class="check-row">
+            <div class="check-box">✓</div>
+            <div>
+              <strong>Building & Property Guidance</strong>
+              <span>
+                Support in understanding available options based on your
+                location and requirement.
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section-soft" id="services">
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <div class="kicker">Our Services</div>
+        <h2 class="section-title">Kandaswamy Consultant property services</h2>
+        <p class="section-description">
+          Clear and practical consultation for different types of property
+          requirements.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card reveal">
+          <div class="service-icon">01</div>
+          <h3>Property Consultation</h3>
+          <p>
+            Discuss your property requirement and receive guidance on suitable
+            options and next steps.
+          </p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">02</div>
+          <h3>Residential Properties</h3>
+          <p>
+            Consultation for apartments, houses, villas and residential
+            property opportunities.
+          </p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">03</div>
+          <h3>Commercial Properties</h3>
+          <p>
+            Assistance for offices, business premises and other commercial
+            property requirements.
+          </p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">04</div>
+          <h3>Building Consultation</h3>
+          <p>
+            Discuss building-related property needs and receive structured
+            guidance based on your requirement.
+          </p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">05</div>
+          <h3>Location Guidance</h3>
+          <p>
+            Compare locations and understand factors that may matter for your
+            residential or commercial requirement.
+          </p>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">06</div>
+          <h3>Property Requirement Support</h3>
+          <p>
+            Tell us what you are looking for and Kandaswamy Consultant can help
+            you organise and evaluate the available choices.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <div class="kicker">Property Categories</div>
+        <h2 class="section-title">Explore the type of property you need</h2>
+        <p class="section-description">
+          These categories can later be updated with your actual properties,
+          project names, photographs and locations.
+        </p>
+      </div>
+
+      <div class="project-grid">
+
+        <article class="project-card reveal">
+          <div class="project-image one">
+            <span class="project-label">Residential</span>
+          </div>
+
+          <div class="project-body">
+            <h3>Residential Properties</h3>
+            <p>
+              Apartments, independent houses, villas and other residential
+              opportunities based on your requirement.
+            </p>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-image two">
+            <span class="project-label">Building</span>
+          </div>
+
+          <div class="project-body">
+            <h3>Building Opportunities</h3>
+            <p>
+              Building and property consultation for customers looking for
+              suitable spaces and project opportunities.
+            </p>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-image three">
+            <span class="project-label">Commercial</span>
+          </div>
+
+          <div class="project-body">
+            <h3>Commercial Properties</h3>
+            <p>
+              Offices and commercial property consultation for business and
+              professional requirements.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container why-grid">
+
+      <div class="why-copy reveal">
+        <div class="kicker">Why Kandaswamy Consultant</div>
+
+        <h2>Simple, clear and customer-focused property consultation</h2>
+
+        <p>
+          We keep the consultation process understandable. The goal is to help
+          you communicate your requirement clearly, review relevant options and
+          make a more informed property decision.
+        </p>
+      </div>
+
+      <div class="why-list">
+
+        <div class="why-card reveal">
+          <strong>Requirement First</strong>
+          <span>
+            We begin by understanding what type of property or building you are
+            actually looking for.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Clear Communication</strong>
+          <span>
+            Property information is presented in a simple and understandable
+            way.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Residential & Commercial</strong>
+          <span>
+            Consultation can support different property categories based on the
+            customer's requirement.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Personal Guidance</strong>
+          <span>
+            Discuss the available options directly and decide what fits your
+            needs best.
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section section-soft" id="process">
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <div class="kicker">How It Works</div>
+        <h2 class="section-title">A simple consultation process</h2>
+        <p class="section-description">
+          Start with your requirement and move through the property selection
+          process step by step.
+        </p>
+      </div>
+
+      <div class="steps">
+
+        <div class="step-card reveal">
+          <div class="step-number">01</div>
+          <h3>Share Your Requirement</h3>
+          <p>
+            Tell Kandaswamy Consultant the property type, location and basic
+            requirement.
+          </p>
+        </div>
+
+        <div class="step-card reveal">
+          <div class="step-number">02</div>
+          <h3>Discuss Options</h3>
+          <p>
+            Review the types of properties or building opportunities that may
+            suit your requirement.
+          </p>
+        </div>
+
+        <div class="step-card reveal">
+          <div class="step-number">03</div>
+          <h3>Understand Details</h3>
+          <p>
+            Discuss the relevant property information and clarify important
+            questions.
+          </p>
+        </div>
+
+        <div class="step-card reveal">
+          <div class="step-number">04</div>
+          <h3>Choose Your Next Step</h3>
+          <p>
+            Decide how you want to proceed after reviewing the available
+            information.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <div class="kicker">Contact Kandaswamy Consultant</div>
+        <h2 class="section-title">Tell us what property you are looking for</h2>
+        <p class="section-description">
+          Replace the sample phone, WhatsApp and email below with your actual
+          Kandaswamy Consultant contact details before publishing.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-card reveal">
+          <h3>Kandaswamy Consultant</h3>
+
+          <p>
+            Contact us for residential, commercial, building and property
+            consultation.
+          </p>
+
+          <div class="contact-list">
+
+            <!-- CHANGE THIS PHONE NUMBER -->
+            <a href="tel:+919999999999" class="contact-link">
+              <div class="contact-icon">☎</div>
+              <div class="contact-copy">
+                <strong>Call Kandaswamy Consultant</strong>
+                <small>+91 99999 99999</small>
+              </div>
+            </a>
+
+            <!-- CHANGE THIS WHATSAPP NUMBER -->
+            <a
+              href="https://wa.me/919999999999?text=Hello%20Kandaswamy%20Consultant%2C%20I%20would%20like%20to%20discuss%20a%20property%20requirement."
+              target="_blank"
+              rel="noopener"
+              class="contact-link"
+            >
+              <div class="contact-icon">W</div>
+              <div class="contact-copy">
+                <strong>WhatsApp</strong>
+                <small>Chat about your property requirement</small>
+              </div>
+            </a>
+
+            <!-- CHANGE THIS EMAIL -->
+            <a
+              href="mailto:kandaswamyconsultant@example.com"
+              class="contact-link"
+            >
+              <div class="contact-icon">✉</div>
+              <div class="contact-copy">
+                <strong>Email</strong>
+                <small>kandaswamyconsultant@example.com</small>
+              </div>
+            </a>
+
+            <!-- CHANGE THIS LOCATION -->
+            <div class="contact-link">
+              <div class="contact-icon">⌖</div>
+              <div class="contact-copy">
+                <strong>Location</strong>
+                <small>Tamil Nadu, India</small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="contact-image reveal">
+          <div class="contact-overlay">
+            <h3>Talk to Kandaswamy Consultant</h3>
+
+            <p>
+              Share your residential, commercial or building property
+              requirement and discuss the next step.
+            </p>
+
+            <div class="contact-buttons">
+              <a href="tel:+919999999999" class="btn btn-gold">Call Now</a>
+
+              <a
+                href="https://wa.me/919999999999?text=Hello%20Kandaswamy%20Consultant%2C%20I%20would%20like%20to%20discuss%20a%20property%20requirement."
+                target="_blank"
+                rel="noopener"
+                class="btn btn-white"
+              >
+                WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <div class="cta-card reveal">
+        <h2>Looking for property or building consultation?</h2>
+
+        <p>
+          Contact Kandaswamy Consultant and discuss your residential,
+          commercial or property requirement.
+        </p>
+
+        <a href="#contact" class="btn btn-white">Contact Kandaswamy Consultant →</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="/">
+          <img src="/rentsiho-logo.png" alt="Rentsiho" />
+        </a>
+
+        <h3>Kandaswamy Consultant</h3>
+
+        <p>
+          Property and building consultation for residential, commercial and
+          related real-estate requirements.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-title">Kandaswamy Consultant</div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#projects">Property Categories</a>
+          <a href="#process">How It Works</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-title">Quick Links</div>
+        <div class="footer-links">
+          <a href="#home">Home</a>
+          <a href="#contact">Contact</a>
+          <a href="/">Rentsiho Home</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-title">Contact</div>
+        <div class="footer-links">
+          <a href="tel:+919999999999">+91 99999 99999</a>
+          <a href="mailto:kandaswamyconsultant@example.com">
+            kandaswamyconsultant@example.com
+          </a>
+          <span>Tamil Nadu, India</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>
+        © <span id="year"></span> Kandaswamy Consultant. All rights reserved.
+      </span>
+
+      <span>Powered by Rentsiho</span>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  const menuButton = document.getElementById("menuButton");
+  const navLinks = document.getElementById("navLinks");
+
+  menuButton.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("mobile-open");
+
+    menuButton.classList.toggle("active", isOpen);
+    menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    document.body.classList.toggle("menu-open", isOpen);
+  });
+
+  document.querySelectorAll("#navLinks a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("mobile-open");
+      menuButton.classList.remove("active");
+      menuButton.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    });
+  });
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+    }
+  );
+
+  revealElements.forEach((element) => observer.observe(element));
+
+  const sections = document.querySelectorAll("section[id]");
+  const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach((section) => {
+      const top = section.offsetTop - 130;
+
+      if (window.scrollY >= top) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navAnchors.forEach((link) => {
+      link.classList.remove("active");
+
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  });
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
