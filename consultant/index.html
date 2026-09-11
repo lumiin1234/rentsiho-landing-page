@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0B1B29" />
+  <meta
+    name="description"
+    content="Kandaswamy Consultant - website development, web application development, Azure App Service deployment, hosting, maintenance and technical support."
+  />
+
+  <title>Kandaswamy Consultant | Global Strategy & Business Growth</title>
+  <link rel="canonical" href="https://rentsiho.com/consultant/" />
+  <meta property="og:title" content="Kandaswamy Consultant | Global Strategy & Business Growth" />
+  <meta property="og:description" content="Kandaswamy Consultant - Global Strategy, Business Growth, Web & Cloud Solutions from Zurich, Switzerland." />
+  <meta property="og:url" content="https://rentsiho.com/consultant/" />
+
+  <style>
+    :root {
+      --gold: #D4A72C;
+      --gold-dark: #A97912;
+      --gold-light: #F0C85A;
+      --gold-soft: #FBF3DF;
+
+      --navy: #0B1B29;
+      --navy-dark: #07131E;
+
+      --text: #2D3338;
+      --muted: #687078;
+
+      --white: #FFFFFF;
+      --page: #F7F5F0;
+      --border: #E6E0D4;
+
+      --shadow-sm: 0 10px 30px rgba(22, 27, 55, 0.08);
+      --shadow-md: 0 18px 48px rgba(22, 27, 55, 0.12);
+      --shadow-lg: 0 25px 80px rgba(22, 27, 55, 0.16);
+
+      --container: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 100px 0;
+    }
+
+    .section-soft {
+      background: var(--page);
+    }
+
+    .section-dark {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(212,167,44,.20), transparent 30%),
+        linear-gradient(135deg, var(--navy), var(--navy-dark));
+    }
+
+    .section-heading {
+      max-width: 790px;
+      margin: 0 auto 54px;
+      text-align: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+      color: var(--gold-dark);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 28px;
+      height: 3px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+
+    .section-title {
+      color: var(--navy);
+      font-size: clamp(34px, 4.5vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -1.6px;
+    }
+
+    .section-dark .section-title {
+      color: var(--white);
+    }
+
+    .section-description {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .section-dark .section-description {
+      color: rgba(255,255,255,.72);
+    }
+
+    .btn {
+      min-height: 54px;
+      padding: 0 24px;
+      border: 0;
+      border-radius: 13px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-gold {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      box-shadow: 0 16px 35px rgba(212,167,44,.30);
+    }
+
+    .btn-white {
+      color: var(--navy);
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    /* Header */
+
+    .header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(230,224,212,.9);
+    }
+
+    .nav {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 150px;
+      height: 58px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .brand-divider {
+      width: 1px;
+      height: 34px;
+      background: var(--border);
+    }
+
+    .brand-copy strong {
+      display: block;
+      color: var(--navy);
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .brand-copy small {
+      display: block;
+      margin-top: 3px;
+      color: var(--gold-dark);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: #464B5E;
+      font-size: 14px;
+      font-weight: 800;
+      transition: color .2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold-dark);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-cta {
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 11px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      background: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .menu-button {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      display: none;
+      place-items: center;
+      cursor: pointer;
+    }
+
+    .menu-button span,
+    .menu-button span::before,
+    .menu-button span::after {
+      width: 20px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--navy);
+      display: block;
+      position: relative;
+      transition: .25s ease;
+    }
+
+    .menu-button span::before,
+    .menu-button span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .menu-button span::before { top: -6px; }
+    .menu-button span::after { top: 6px; }
+
+    .menu-button.active span { background: transparent; }
+    .menu-button.active span::before { top: 0; transform: rotate(45deg); }
+    .menu-button.active span::after { top: 0; transform: rotate(-45deg); }
+
+    /* Hero */
+
+    .hero {
+      min-height: 100vh;
+      padding: 145px 0 90px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(212,167,44,.20), transparent 26%),
+        radial-gradient(circle at 10% 88%, rgba(212,167,44,.10), transparent 25%),
+        linear-gradient(180deg, #FCFCFA 0%, #F4F1E9 100%);
+    }
+
+    .hero::before {
+      content: "";
+      width: 560px;
+      height: 560px;
+      position: absolute;
+      right: -260px;
+      top: 130px;
+      border-radius: 50%;
+      border: 90px solid rgba(212,167,44,.05);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: #745726;
+      background: #F5EDDC;
+      border: 1px solid #E9D9B8;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .hero-copy h1 {
+      margin: 22px 0 24px;
+      color: var(--navy);
+      font-size: clamp(48px, 6.3vw, 80px);
+      line-height: .98;
+      letter-spacing: -3px;
+    }
+
+    .hero-copy h1 span {
+      color: var(--gold);
+    }
+
+    .hero-copy p {
+      max-width: 660px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.85;
+    }
+
+    .hero-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-points {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      color: #585D70;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero-point {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .check-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #4F3A1C;
+      background: #F5EAD1;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 610px;
+    }
+
+    .browser-window {
+      position: absolute;
+      inset: 20px 0 20px 30px;
+      padding: 16px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.95);
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(14px);
+    }
+
+    .browser-inner {
+      height: 100%;
+      overflow: hidden;
+      border-radius: 21px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .browser-top {
+      height: 55px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FBFBFD;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .browser-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #D5D7DE;
+    }
+
+    .browser-url {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .demo-app {
+      min-height: 475px;
+      display: grid;
+      grid-template-columns: 100px 1fr;
+    }
+
+    .demo-sidebar {
+      padding: 22px 13px;
+      background: linear-gradient(180deg, var(--navy), var(--navy-dark));
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .demo-logo {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 12px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: var(--gold);
+      font-weight: 900;
+    }
+
+    .demo-line {
+      height: 9px;
+      border-radius: 99px;
+      background: rgba(255,255,255,.14);
+    }
+
+    .demo-line.active {
+      background: rgba(240,200,90,.85);
+    }
+
+    .demo-content {
+      padding: 25px;
+      background: #FCFCFD;
+    }
+
+    .demo-content h3 {
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .demo-content p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .demo-stats {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .demo-card {
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .demo-card small {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .demo-card strong {
+      display: block;
+      margin-top: 5px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    .code-panel {
+      margin-top: 15px;
+      padding: 18px;
+      border-radius: 16px;
+      color: #E8EDF2;
+      background: #111820;
+      font-family: Consolas, monospace;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .code-panel .gold {
+      color: #F0C85A;
+    }
+
+    .floating-tech {
+      position: absolute;
+      z-index: 3;
+      right: -28px;
+      top: 72px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .floating-tech strong {
+      display: block;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .floating-tech span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* About */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: .94fr 1.06fr;
+      gap: 68px;
+      align-items: center;
+    }
+
+    .about-visual {
+      min-height: 520px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(11,27,41,.04), rgba(11,27,41,.50)),
+        url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=88");
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-badge {
+      position: absolute;
+      left: 25px;
+      right: 25px;
+      bottom: 25px;
+      max-width: 340px;
+      padding: 20px;
+      border-radius: 18px;
+      color: var(--white);
+      background: rgba(11,27,41,.92);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .about-badge strong {
+      display: block;
+      color: #F3D985;
+      font-size: 18px;
+    }
+
+    .about-badge span {
+      display: block;
+      margin-top: 5px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+    }
+
+    .about-copy h2 {
+      margin: 14px 0 22px;
+      color: var(--navy);
+      font-size: clamp(36px, 4.6vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -1.8px;
+    }
+
+    .about-copy p {
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .check-list {
+      margin-top: 28px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .check-box {
+      flex: 0 0 30px;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: grid;
+      place-items: center;
+      color: #4F3A1C;
+      background: #F5EAD1;
+      font-weight: 900;
+    }
+
+    .check-row strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--navy);
+    }
+
+    .check-row span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Services */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      padding: 30px;
+      border-radius: 20px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 34px rgba(20,24,48,.05);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .service-icon {
+      width: 58px;
+      height: 58px;
+      margin-bottom: 20px;
+      border-radius: 17px;
+      display: grid;
+      place-items: center;
+      color: var(--gold-dark);
+      background: var(--gold-soft);
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .service-card h3 {
+      margin-bottom: 9px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    .service-card p {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .service-list {
+      margin-top: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .service-list span {
+      color: #555D65;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .service-list span::before {
+      content: "✓";
+      margin-right: 8px;
+      color: var(--gold-dark);
+      font-weight: 900;
+    }
+
+    /* Technology */
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .tech-card {
+      min-height: 130px;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .tech-card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: #F3D985;
+      font-size: 17px;
+    }
+
+    .tech-card span {
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    /* Process */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 0 15px;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 20px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-light));
+      box-shadow: 0 13px 28px rgba(212,167,44,.28);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .step-card h3 {
+      margin-bottom: 8px;
+      color: var(--navy);
+      font-size: 19px;
+    }
+
+    .step-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* Why */
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .why-copy h2 {
+      margin: 14px 0 20px;
+      font-size: clamp(36px, 4.6vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -1.8px;
+    }
+
+    .why-copy p {
+      color: rgba(255,255,255,.72);
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    .why-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .why-card {
+      min-height: 150px;
+      padding: 22px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .why-card strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #F3D985;
+      font-size: 16px;
+    }
+
+    .why-card span {
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    /* Contact */
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .92fr 1.08fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .contact-card,
+    .contact-image {
+      min-height: 520px;
+      border-radius: 26px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-card {
+      padding: 38px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 100% 0%, rgba(212,167,44,.08), transparent 28%),
+        var(--white);
+    }
+
+    .contact-card h3 {
+      margin-bottom: 12px;
+      color: var(--navy);
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .contact-card > p {
+      margin-bottom: 26px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 13px;
+    }
+
+    .contact-link {
+      min-height: 72px;
+      padding: 14px 16px;
+      border-radius: 17px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      color: var(--navy);
+      background: #FBFBFE;
+      border: 1px solid #E8E9F2;
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-4px);
+      border-color: #E2CD8B;
+      box-shadow: 0 16px 38px rgba(40,34,86,.10);
+    }
+
+    .contact-icon {
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      font-weight: 900;
+      font-size: 19px;
+    }
+
+    .contact-copy strong {
+      display: block;
+      color: var(--navy);
+      font-size: 15px;
+    }
+
+    .contact-copy small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .contact-image {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(7,19,30,.02), rgba(7,19,30,.64)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=88");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .contact-overlay {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      padding: 25px;
+      border-radius: 20px;
+      color: var(--white);
+      background: rgba(11,27,41,.92);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .contact-overlay h3 {
+      margin-bottom: 7px;
+      font-size: 25px;
+    }
+
+    .contact-overlay p {
+      color: rgba(255,255,255,.72);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .contact-buttons {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* CTA */
+
+    .cta {
+      padding: 90px 0;
+    }
+
+    .cta-card {
+      padding: 70px 40px;
+      border-radius: 30px;
+      text-align: center;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(255,255,255,.18), transparent 24%),
+        linear-gradient(135deg, var(--gold), #8D692D);
+      box-shadow: 0 28px 70px rgba(159,123,56,.28);
+    }
+
+    .cta-card h2 {
+      max-width: 820px;
+      margin: 0 auto;
+      font-size: clamp(35px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -1.8px;
+    }
+
+    .cta-card p {
+      max-width: 680px;
+      margin: 18px auto 28px;
+      color: rgba(255,255,255,.82);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* Footer */
+
+    .footer {
+      padding: 72px 0 26px;
+      color: rgba(255,255,255,.68);
+      background: #0D1C28;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, .7fr);
+      gap: 48px;
+    }
+
+    .footer-brand img {
+      width: 180px;
+      max-height: 90px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .footer-brand h3 {
+      margin-top: 15px;
+      color: var(--white);
+      font-size: 20px;
+    }
+
+    .footer-brand p {
+      max-width: 370px;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-title {
+      margin-bottom: 16px;
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-links a,
+    .footer-links span {
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-bottom {
+      margin-top: 48px;
+      padding-top: 23px;
+      border-top: 1px solid rgba(255,255,255,.09);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      font-size: 13px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .about-grid,
+      .why-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        max-width: 780px;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-button {
+        display: grid;
+      }
+
+      .nav-links.mobile-open {
+        position: fixed;
+        left: 20px;
+        right: 20px;
+        top: 88px;
+        padding: 22px;
+        border-radius: 18px;
+        display: grid;
+        gap: 17px;
+        background: var(--white);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .why-list {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 38px 20px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 26px, var(--container));
+      }
+
+      .section {
+        padding: 76px 0;
+      }
+
+      .nav {
+        min-height: 70px;
+      }
+
+      .brand img {
+        width: 120px;
+        height: 50px;
+      }
+
+      .brand-divider,
+      .brand-copy {
+        display: none;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 110px;
+        padding-bottom: 80px;
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(42px, 13vw, 60px);
+        letter-spacing: -2px;
+      }
+
+      .hero-copy p {
+        font-size: 16px;
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 500px;
+      }
+
+      .browser-window {
+        inset: 10px 0;
+      }
+
+      .floating-tech {
+        display: none;
+      }
+
+      .demo-app {
+        grid-template-columns: 65px 1fr;
+      }
+
+      .demo-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-card:nth-child(3) {
+        display: none;
+      }
+
+      .services-grid,
+      .tech-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card {
+        padding: 24px;
+      }
+
+      .contact-image {
+        min-height: 440px;
+      }
+
+      .contact-overlay {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+      }
+
+      .cta-card {
+        padding: 54px 22px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="container nav">
+
+    <a class="brand" href="https://rentsiho.com/consultant/">
+      <img src="/kandaswamy-consultant-logo.png" alt="Kandaswamy Consultant" />
+      <span class="brand-divider"></span>
+
+      <span class="brand-copy">
+        <strong>Kandaswamy Consultant</strong>
+        <small>Global Strategy | Business Growth</small>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#technology">Technology</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="nav-cta" href="#contact">Start a Project</a>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="container hero-grid">
+
+      <div class="hero-copy reveal">
+        <div class="hero-badge">Kandaswamy Consultant • Web & Cloud Services</div>
+
+        <h1>
+          Build, deploy and grow your
+          <span>digital business.</span>
+        </h1>
+
+        <p>
+          Kandaswamy Consultant provides website development, web application
+          development, Azure App Service deployment, cloud hosting setup,
+          domain configuration, maintenance and technical support for businesses
+          that need reliable digital solutions.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-gold">Start Your Project →</a>
+          <a href="#services" class="btn btn-white">Explore Services</a>
+        </div>
+
+        <div class="hero-points">
+          <div class="hero-point">
+            <span class="check-dot">✓</span>
+            Website Development
+          </div>
+
+          <div class="hero-point">
+            <span class="check-dot">✓</span>
+            Azure App Service
+          </div>
+
+          <div class="hero-point">
+            <span class="check-dot">✓</span>
+            Deployment & Support
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal">
+
+        <div class="browser-window">
+          <div class="browser-inner">
+
+            <div class="browser-top">
+              <div class="browser-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <div class="browser-url">rentsiho.com/consultant</div>
+            </div>
+
+            <div class="demo-app">
+
+              <div class="demo-sidebar">
+                <div class="demo-logo">KC</div>
+                <div class="demo-line active"></div>
+                <div class="demo-line"></div>
+                <div class="demo-line"></div>
+                <div class="demo-line"></div>
+              </div>
+
+              <div class="demo-content">
+                <h3>Business Web Application</h3>
+                <p>Modern • Responsive • Cloud Ready</p>
+
+                <div class="demo-stats">
+                  <div class="demo-card">
+                    <small>Website</small>
+                    <strong>Live</strong>
+                  </div>
+
+                  <div class="demo-card">
+                    <small>Cloud</small>
+                    <strong>Azure</strong>
+                  </div>
+
+                  <div class="demo-card">
+                    <small>Status</small>
+                    <strong>Secure</strong>
+                  </div>
+                </div>
+
+                <div class="code-panel">
+                  <div><span class="gold">const</span> project = {</div>
+                  <div>&nbsp;&nbsp;design: "responsive",</div>
+                  <div>&nbsp;&nbsp;hosting: "azure",</div>
+                  <div>&nbsp;&nbsp;domain: "configured",</div>
+                  <div>&nbsp;&nbsp;support: true</div>
+                  <div>};</div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        <div class="floating-tech">
+          <strong>Azure App Service</strong>
+          <span>Deployment • Hosting • SSL</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container about-grid">
+
+      <div class="about-visual reveal">
+        <div class="about-badge">
+          <strong>From idea to live website.</strong>
+          <span>
+            Design, development, deployment and ongoing technical support from
+            one place.
+          </span>
+        </div>
+      </div>
+
+      <div class="about-copy reveal">
+        <div class="kicker">About Kandaswamy Consultant</div>
+
+        <h2>Digital solutions for businesses that want to move online</h2>
+
+        <p>
+          Kandaswamy Consultant helps businesses create professional websites
+          and web applications, deploy them to cloud platforms and keep them
+          running reliably.
+        </p>
+
+        <p>
+          Whether you need a simple company website, a business dashboard,
+          custom web application or Azure App Service deployment, the goal is
+          to provide a clear development process and a practical solution that
+          fits your business.
+        </p>
+
+        <div class="check-list">
+
+          <div class="check-row">
+            <div class="check-box">✓</div>
+            <div>
+              <strong>Website & Web Application Development</strong>
+              <span>
+                Responsive business websites, landing pages, portals and custom
+                web applications.
+              </span>
+            </div>
+          </div>
+
+          <div class="check-row">
+            <div class="check-box">✓</div>
+            <div>
+              <strong>Azure Deployment & Cloud Setup</strong>
+              <span>
+                App Service deployment, configuration, custom domain and HTTPS
+                setup.
+              </span>
+            </div>
+          </div>
+
+          <div class="check-row">
+            <div class="check-box">✓</div>
+            <div>
+              <strong>Maintenance & Technical Support</strong>
+              <span>
+                Updates, bug fixes, deployment assistance and ongoing website
+                support.
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section section-soft" id="services">
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <div class="kicker">Our Services</div>
+
+        <h2 class="section-title">
+          Complete website, application and cloud services
+        </h2>
+
+        <p class="section-description">
+          Choose a single service or combine development, deployment and
+          maintenance as one complete project.
+        </p>
+      </div>
+
+      <div class="services-grid">
+
+        <article class="service-card reveal">
+          <div class="service-icon">01</div>
+          <h3>Website Development</h3>
+
+          <p>
+            Professional responsive websites designed for businesses, services,
+            products and organisations.
+          </p>
+
+          <div class="service-list">
+            <span>Business websites</span>
+            <span>Landing pages</span>
+            <span>Mobile responsive design</span>
+            <span>Contact & enquiry pages</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">02</div>
+          <h3>Web Application Development</h3>
+
+          <p>
+            Custom web applications and dashboards built around your business
+            workflow and requirements.
+          </p>
+
+          <div class="service-list">
+            <span>Admin dashboards</span>
+            <span>Customer portals</span>
+            <span>API integration</span>
+            <span>Database applications</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">03</div>
+          <h3>Azure App Service</h3>
+
+          <p>
+            Deploy your web application to Microsoft Azure App Service and
+            configure it for production use.
+          </p>
+
+          <div class="service-list">
+            <span>App Service deployment</span>
+            <span>Environment configuration</span>
+            <span>Custom domain setup</span>
+            <span>HTTPS / SSL configuration</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">04</div>
+          <h3>Domain & Hosting Setup</h3>
+
+          <p>
+            Assistance connecting your domain and hosting environment so your
+            website is accessible using your professional web address.
+          </p>
+
+          <div class="service-list">
+            <span>Domain connection</span>
+            <span>DNS configuration</span>
+            <span>GitHub Pages setup</span>
+            <span>Cloud hosting setup</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">05</div>
+          <h3>UI / Website Redesign</h3>
+
+          <p>
+            Improve an existing website or application with a cleaner,
+            responsive and more professional interface.
+          </p>
+
+          <div class="service-list">
+            <span>Modern UI redesign</span>
+            <span>Responsive layout</span>
+            <span>Brand colour integration</span>
+            <span>Usability improvements</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">06</div>
+          <h3>Maintenance & Support</h3>
+
+          <p>
+            Technical assistance after launch to keep your site updated and
+            resolve application or deployment issues.
+          </p>
+
+          <div class="service-list">
+            <span>Bug fixing</span>
+            <span>Content updates</span>
+            <span>Deployment support</span>
+            <span>Performance checks</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">07</div>
+          <h3>API Integration</h3>
+
+          <p>
+            Connect your frontend application to backend APIs and external
+            services securely and reliably.
+          </p>
+
+          <div class="service-list">
+            <span>REST API integration</span>
+            <span>Authentication flows</span>
+            <span>JSON data handling</span>
+            <span>Error handling</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">08</div>
+          <h3>Flutter Web Support</h3>
+
+          <p>
+            Support for Flutter web applications including UI development,
+            API integration and deployment.
+          </p>
+
+          <div class="service-list">
+            <span>Flutter web UI</span>
+            <span>GetX integration</span>
+            <span>API connection</span>
+            <span>Web deployment</span>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-icon">09</div>
+          <h3>Technical Consultation</h3>
+
+          <p>
+            Discuss your software requirement and get help choosing a practical
+            technical approach for development and deployment.
+          </p>
+
+          <div class="service-list">
+            <span>Project planning</span>
+            <span>Technology guidance</span>
+            <span>Hosting guidance</span>
+            <span>Deployment planning</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY -->
+  <section class="section section-dark" id="technology">
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <div class="kicker">Technology & Platforms</div>
+
+        <h2 class="section-title">
+          Modern tools for practical web solutions
+        </h2>
+
+        <p class="section-description">
+          Technologies can be selected based on your project requirements,
+          hosting environment and existing system.
+        </p>
+      </div>
+
+      <div class="tech-grid">
+
+        <div class="tech-card reveal">
+          <strong>Microsoft Azure</strong>
+          <span>
+            Azure App Service, web hosting, deployment and production
+            configuration.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>Flutter Web</strong>
+          <span>
+            Responsive web dashboards and business applications using Flutter.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>HTML / CSS / JavaScript</strong>
+          <span>
+            Fast, responsive company websites and landing pages.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>.NET & REST APIs</strong>
+          <span>
+            Backend API integration and business application connectivity.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>GitHub</strong>
+          <span>
+            Source control, GitHub Pages and deployment workflow support.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>Custom Domains</strong>
+          <span>
+            Domain mapping, DNS records and HTTPS configuration.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>Responsive UI</strong>
+          <span>
+            Desktop, tablet and mobile-friendly design for modern browsers.
+          </span>
+        </div>
+
+        <div class="tech-card reveal">
+          <strong>Maintenance</strong>
+          <span>
+            Post-launch changes, bug fixing, deployment and technical support.
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section section-soft" id="process">
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <div class="kicker">How We Work</div>
+
+        <h2 class="section-title">
+          From your requirement to a live website
+        </h2>
+
+        <p class="section-description">
+          A simple development process that keeps the project understandable
+          from planning through deployment.
+        </p>
+      </div>
+
+      <div class="steps">
+
+        <div class="step-card reveal">
+          <div class="step-number">01</div>
+
+          <h3>Discuss Requirement</h3>
+
+          <p>
+            Share your website, application, hosting or deployment requirement.
+          </p>
+        </div>
+
+        <div class="step-card reveal">
+          <div class="step-number">02</div>
+
+          <h3>Plan & Design</h3>
+
+          <p>
+            Define pages, functionality, design style and the technical
+            approach.
+          </p>
+        </div>
+
+        <div class="step-card reveal">
+          <div class="step-number">03</div>
+
+          <h3>Develop & Test</h3>
+
+          <p>
+            Build the website or application and verify its main functionality
+            and responsive layout.
+          </p>
+        </div>
+
+        <div class="step-card reveal">
+          <div class="step-number">04</div>
+
+          <h3>Deploy & Support</h3>
+
+          <p>
+            Publish the project, connect the domain and provide post-deployment
+            support.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="section section-dark">
+    <div class="container why-grid">
+
+      <div class="why-copy reveal">
+        <div class="kicker">Why Kandaswamy Consultant</div>
+
+        <h2>
+          Development and deployment support in one place
+        </h2>
+
+        <p>
+          Instead of handling website development, hosting and deployment
+          separately, you can manage the complete technical process through one
+          service—from building the application to publishing it on your domain.
+        </p>
+      </div>
+
+      <div class="why-list">
+
+        <div class="why-card reveal">
+          <strong>Business-Focused Solutions</strong>
+
+          <span>
+            Development starts from your actual business requirement rather
+            than unnecessary features.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Responsive Design</strong>
+
+          <span>
+            Websites and web applications designed to work across desktop,
+            tablet and mobile screens.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Cloud Deployment</strong>
+
+          <span>
+            Support for publishing websites and applications using platforms
+            such as Azure and GitHub Pages.
+          </span>
+        </div>
+
+        <div class="why-card reveal">
+          <strong>Ongoing Technical Support</strong>
+
+          <span>
+            Assistance with deployment errors, updates, bug fixes and future
+            changes.
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="container">
+
+      <div class="section-heading reveal">
+        <div class="kicker">Contact Kandaswamy Consultant</div>
+
+        <h2 class="section-title">
+          Have a website or web application project?
+        </h2>
+
+        <p class="section-description">
+          Share your requirement for website development, application
+          development, Azure deployment or technical support.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <div class="contact-card reveal">
+          <h3>Start your project</h3>
+
+          <p>
+            Contact Kandaswamy Consultant in Zurich, Switzerland for business consulting, website development, web applications, Azure deployment and technical support.
+          </p>
+
+          <div class="contact-list">
+
+            <!-- CHANGE PHONE NUMBER -->
+            <a href="tel:+41763582811" class="contact-link">
+              <div class="contact-icon">☎</div>
+
+              <div class="contact-copy">
+                <strong>Call</strong>
+                <small>+41 76 358 28 11</small>
+              </div>
+            </a>
+
+            <!-- CHANGE WHATSAPP NUMBER -->
+            <a
+              href="https://wa.me/41763582811?text=Hello%20Kandaswamy%20Consultant%2C%20I%20would%20like%20to%20discuss%20a%20business%20or%20digital%20project."
+              target="_blank"
+              rel="noopener"
+              class="contact-link"
+            >
+              <div class="contact-icon">W</div>
+
+              <div class="contact-copy">
+                <strong>WhatsApp</strong>
+                <small>Discuss your website or application requirement</small>
+              </div>
+            </a>
+
+            <!-- CHANGE EMAIL -->
+            <a
+              href="mailto:kandaswamyconsultant@gmail.com"
+              class="contact-link"
+            >
+              <div class="contact-icon">✉</div>
+
+              <div class="contact-copy">
+                <strong>Email</strong>
+                <small>kandaswamyconsultant@gmail.com</small>
+              </div>
+            </a>
+
+            <!-- CHANGE LOCATION -->
+            <div class="contact-link">
+              <div class="contact-icon">⌖</div>
+
+              <div class="contact-copy">
+                <strong>Location</strong>
+                <small>Zurich, Switzerland</small>
+              </div>
+            </div>
+
+            <a
+              href="https://rentsiho.com/consultant/"
+              target="_blank"
+              rel="noopener"
+              class="contact-link"
+            >
+              <div class="contact-icon">🌐</div>
+
+              <div class="contact-copy">
+                <strong>Website</strong>
+                <small>rentsiho.com/consultant</small>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+        <div class="contact-image reveal">
+          <div class="contact-overlay">
+
+            <h3>Let's build your digital solution</h3>
+
+            <p>
+              Website development, web application development, Azure App
+              Service deployment, custom domain setup and ongoing support.
+            </p>
+
+            <div class="contact-buttons">
+
+              <a href="tel:+41763582811" class="btn btn-gold">
+                Call Now
+              </a>
+
+              <a
+                href="https://wa.me/41763582811?text=Hello%20Kandaswamy%20Consultant%2C%20I%20would%20like%20to%20discuss%20a%20business%20or%20digital%20project."
+                target="_blank"
+                rel="noopener"
+                class="btn btn-white"
+              >
+                WhatsApp
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+
+      <div class="cta-card reveal">
+
+        <h2>
+          Ready to build or deploy your website?
+        </h2>
+
+        <p>
+          Contact Kandaswamy Consultant for website development, web application
+          development, Azure deployment and technical support.
+        </p>
+
+        <a href="#contact" class="btn btn-white">
+          Start a Project →
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="/">
+          <img src="/kandaswamy-consultant-logo.png" alt="Kandaswamy Consultant" />
+        </a>
+
+        <h3>Kandaswamy Consultant</h3>
+
+        <p>
+          Website development, web applications, Azure App Service deployment,
+          hosting setup, domain configuration and technical support.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-title">Services</div>
+
+        <div class="footer-links">
+          <a href="#services">Website Development</a>
+          <a href="#services">Web Applications</a>
+          <a href="#services">Azure App Service</a>
+          <a href="#services">Maintenance</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-title">Quick Links</div>
+
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#technology">Technology</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+          <a href="https://rentsiho.com/">Rentsiho Home</a>
+          <a href="https://rentsiho.com/consultant/">Consultant Website</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-title">Contact</div>
+
+        <div class="footer-links">
+          <a href="tel:+41763582811">+41 76 358 28 11</a>
+
+          <a href="mailto:kandaswamyconsultant@gmail.com">
+            kandaswamyconsultant@gmail.com
+          </a>
+
+          <a href="https://rentsiho.com/consultant/" target="_blank" rel="noopener">
+            rentsiho.com/consultant
+          </a>
+
+          <span>Zurich, Switzerland</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <span>
+        © <span id="year"></span> Kandaswamy Consultant. All rights reserved.
+      </span>
+
+      <span>Powered by Rentsiho</span>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  const menuButton = document.getElementById("menuButton");
+  const navLinks = document.getElementById("navLinks");
+
+  menuButton.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("mobile-open");
+
+    menuButton.classList.toggle("active", isOpen);
+    menuButton.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+    document.body.classList.toggle("menu-open", isOpen);
+  });
+
+  document.querySelectorAll("#navLinks a").forEach((link) => {
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("mobile-open");
+      menuButton.classList.remove("active");
+      menuButton.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
+    });
+  });
+
+  const revealElements = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12,
+    }
+  );
+
+  revealElements.forEach((element) => observer.observe(element));
+
+  const sections = document.querySelectorAll("section[id]");
+  const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach((section) => {
+      const top = section.offsetTop - 130;
+
+      if (window.scrollY >= top) {
+        current = section.getAttribute("id");
+      }
+    });
+
+    navAnchors.forEach((link) => {
+      link.classList.remove("active");
+
+      if (link.getAttribute("href") === `#${current}`) {
+        link.classList.add("active");
+      }
+    });
+  });
+
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+</script>
+
+</body>
+</html>
