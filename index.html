@@ -20,6 +20,8 @@
   <title>Rentsiho | Rental Management Made Simple</title>
 
   <style>
+    /* Keep the unused local demo out of the landing page. */
+    #demoDashboardScreen[hidden] { display: none !important; }
     :root {
       --primary: #D4A72C;
       --primary-dark: #A97912;
@@ -2833,7 +2835,7 @@
   <!-- ============================================================
        FRONTEND-ONLY DEMO DASHBOARD
        ============================================================ -->
-  <section class="demo-screen" id="demoDashboardScreen" aria-hidden="true">
+  <section class="demo-screen" id="demoDashboardScreen" aria-hidden="true" hidden>
     <div class="demo-dashboard-page">
       <div class="demo-dashboard-topbar">
         <div class="demo-dashboard-brand">
