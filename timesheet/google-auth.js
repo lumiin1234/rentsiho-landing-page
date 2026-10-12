@@ -16,7 +16,7 @@
     window.TIMESHEET_USER = null;
     document.getElementById("timesheet-app").hidden = true;
     document.getElementById("login-panel").hidden = false;
-    status.textContent = "Session expired. Please login with Google again.";
+    status.textContent = "Please login with Google.";
   });
   async function receiveCredential(response) {
     if (signingIn) return;
