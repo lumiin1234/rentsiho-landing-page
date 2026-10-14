@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#0d1c28">
   <title>Timesheet | Rentsiho</title>
   <link rel="icon" type="image/png" href="../rentsiho-logo.png">
-  <link rel="stylesheet" href="timesheet.css?v=monthly-4">
+  <link rel="stylesheet" href="timesheet.css?v=monthly-7">
   <script defer src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.mini.min.js"></script>
   <script defer src="auth-config.js?v=monthly-5"></script>
   <script defer src="timesheet-api.js"></script>
-  <script defer src="google-auth.js?v=monthly-4"></script>
+  <script defer src="google-auth.js?v=monthly-7"></script>
 </head>
 <body>
   <header class="header">
@@ -32,16 +32,21 @@
     <div class="records-heading"><span id="account-name"></span><button class="btn btn-outline" id="signout-button" type="button">Logout</button></div>
     <section class="card" aria-labelledby="monthly-title">
       <h2 id="monthly-title">Monthly timesheet</h2>
-      <p class="table-help">Enter your work for each date below, then click Save month once.</p>
+      <p class="table-help">Each month is generated automatically. Enter your daily work, then click Save month.</p>
+      <div class="month-shortcuts" role="group" aria-label="Quick month selection">
+        <button id="current-month" class="btn btn-outline" type="button" aria-pressed="false">Current month</button>
+        <button id="last-month" class="btn btn-outline" type="button" aria-pressed="false">Last month</button>
+      </div>
       <div class="month-toolbar">
         <label>Month<select id="month-select"></select></label>
         <label>Year<input id="year-select" type="number" min="1900" max="9999" required></label>
         <input id="month-picker" type="hidden">
         <div class="total"><span>Total working days</span><strong id="month-total">0</strong><span id="month-filled">0 filled rows</span></div>
       </div>
+      <p class="weekend-legend"><span aria-hidden="true"></span>Saturday and Sunday are highlighted. Weekend work can still be saved.</p>
       <form id="month-form">
+        <div class="actions"><button id="save-month" class="btn btn-primary" type="submit">Save month</button><button id="export-button" class="btn btn-outline" type="button">Export month (.xlsx)</button><span id="month-state" role="status" aria-live="polite"></span></div>
         <div class="table-wrap"><table><thead><tr><th>Date</th><th>Days</th><th>Location</th><th>Phase</th><th>Task Notes</th><th>Actions</th></tr></thead><tbody id="month-rows"></tbody></table></div>
-        <div class="actions"><button id="save-month" class="btn btn-primary">Save month</button><button id="export-button" class="btn btn-outline" type="button">Export month (.xlsx)</button><span id="month-state" role="status" aria-live="polite"></span></div>
       </form>
     </section>
     </div>

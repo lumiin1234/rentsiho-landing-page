@@ -9,7 +9,7 @@
     document.getElementById("account-name").textContent = user?.email || user?.name || "Authenticated Timesheet user";
     document.getElementById("login-panel").hidden = true;
     document.getElementById("timesheet-app").hidden = false;
-    if (!loaded) { loaded = true; const script = document.createElement("script"); script.src = "timesheet.js?v=monthly-4"; script.onerror = () => { document.getElementById("status").textContent = "Unable to load Timesheet. Reload the page."; }; document.head.append(script); }
+    if (!loaded) { loaded = true; const script = document.createElement("script"); script.src = "timesheet.js?v=monthly-7"; script.onerror = () => { document.getElementById("status").textContent = "Unable to load Timesheet. Reload the page."; }; document.head.append(script); }
     else window.dispatchEvent(new Event("timesheet-login"));
   }
   window.addEventListener("timesheet-session-expired", () => {

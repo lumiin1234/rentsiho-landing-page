@@ -7,6 +7,15 @@ function mapRecord(row) {
 }
 let busy=false;
 const now=new Date(), from=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-01`;
+const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
+function relativeMonth(offset=0, today=new Date()) {
+  const date=new Date(today.getFullYear(),today.getMonth()+offset,1);
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}`;
+}
+function updateMonthShortcuts() {
+  $("current-month").setAttribute("aria-pressed",String($("month-picker").value===relativeMonth()));
+  $("last-month").setAttribute("aria-pressed",String($("month-picker").value===relativeMonth(-1)));
+}
 const store={async list(from,to,page) {
   const result=await api(`/api/timesheets?${new URLSearchParams({from,to,page,pageSize:100})}`);
   if (!Array.isArray(result?.items) || !Number.isInteger(result.total)) throw new Error("Invalid monthly response.");
@@ -14,7 +23,7 @@ const store={async list(from,to,page) {
 }};
 function message(text) { $("status").textContent=text; }
 function controls() {
-  document.querySelectorAll("#month-form input,#month-form select,#month-form textarea,#month-form button,#month-select,#year-select").forEach(e=>e.disabled=busy || !window.TIMESHEET_USER);
+  document.querySelectorAll("#month-form input,#month-form select,#month-form textarea,#month-form button,#month-select,#year-select,#current-month,#last-month").forEach(e=>e.disabled=busy || !window.TIMESHEET_USER);
   $("save-month").disabled=busy || !monthReady || !window.TIMESHEET_USER;
   $("export-button").disabled=busy || !monthReady || !window.TIMESHEET_USER;
 }
@@ -26,7 +35,7 @@ async function run(action) {
 }
 let monthReady = false, monthDirty = false;
 $("month-picker").value = from.slice(0,7);
-["January","February","March","April","May","June","July","August","September","October","November","December"].forEach((name,index)=> {
+monthNames.forEach((name,index)=> {
   const option=document.createElement("option"); option.value=String(index+1).padStart(2,"0"); option.textContent=name; $("month-select").append(option);
 });
 $("month-select").value=from.slice(5,7); $("year-select").value=from.slice(0,4);
@@ -63,10 +72,16 @@ async function loadMonth(force = false) {
     const entries = records.filter(r=>r.workDate===date);
     for (const entry of entries.length ? entries : [{workDate:date,days:"",location:"",phase:"",taskNotes:""}]) {
       const row = document.createElement("tr"); row.dataset.date=date;
+      const weekday=new Date(year,number-1,day).getDay();
+      if (weekday===0 || weekday===6) row.classList.add("weekend-row");
       if (entry.id != null) row.dataset.id=entry.id;
-      const dateCell=document.createElement("td"); dateCell.textContent=date; row.append(dateCell);
+      const dateCell=document.createElement("td"); dateCell.textContent=date;
+      const dayLabel=document.createElement("span"); dayLabel.className="weekday-label";
+      dayLabel.textContent=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][weekday];
+      dateCell.append(dayLabel); row.append(dateCell);
       for (const name of ["days","location","phase","taskNotes"]) {
         const cell=document.createElement("td"), input=document.createElement(name==="days" ? "select" : name==="taskNotes" ? "textarea" : "input");
+        cell.dataset.label={days:"Days",location:"Location",phase:"Phase",taskNotes:"Task Notes"}[name];
         input.name=name; input.setAttribute("aria-label",`${name} for ${date}`);
         if (name==="days") for (const value of ["", "1", "0.5", "0"]) { const option=document.createElement("option"); option.value=value; option.textContent=value==="" ? "\u2014" : value; input.append(option); }
         else input.maxLength=name==="taskNotes" ? 5000 : 150;
@@ -85,10 +100,13 @@ async function loadMonth(force = false) {
       $("month-rows").append(row);
     }
   }
+  $("monthly-title").textContent=`${monthNames[number-1]} ${year} timesheet`;
+  updateMonthShortcuts();
   updateMonthlySummary(); monthReady=true; monthDirty=false; $("month-state").textContent=""; controls();
 }
 $("month-form").addEventListener("input",()=> { monthDirty=true; updateMonthlySummary(); $("month-state").textContent="Unsaved changes"; });
 async function changeMonth() {
+  if (busy) return;
   const previous=$("month-picker").value;
   if (!$("year-select").reportValidity() || (monthDirty && !confirm("Discard unsaved monthly changes?"))) {
     $("month-select").value=previous.slice(5,7); $("year-select").value=previous.slice(0,4); return;
@@ -98,6 +116,15 @@ async function changeMonth() {
 }
 $("month-select").addEventListener("change",changeMonth);
 $("year-select").addEventListener("change",changeMonth);
+function openRelativeMonth(offset) {
+  if (busy || !window.TIMESHEET_USER) return;
+  const month=relativeMonth(offset);
+  if (month===$("month-picker").value && monthReady) return;
+  $("month-select").value=month.slice(5,7); $("year-select").value=month.slice(0,4);
+  changeMonth();
+}
+$("current-month").addEventListener("click",()=>openRelativeMonth(0));
+$("last-month").addEventListener("click",()=>openRelativeMonth(-1));
 $("month-form").addEventListener("submit",event=> {
   event.preventDefault(); if (!monthReady || !$("month-form").reportValidity()) return;
   const rows=[...$("month-rows").rows], entries=[], deleteIds=[];
