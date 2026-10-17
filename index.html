@@ -3153,10 +3153,11 @@
           rentsihoShowGoogleMessage(data.message || `Google login failed (${result.status}).`, true);
           return;
         }
-        rentsihoShowGoogleMessage(`Google authentication successful. Welcome ${data.name || "user"}!`);
-        // Do NOT redirect straight into the Flutter dashboard: the API session
-        // is not automatically shared with the Flutter site on another origin.
-        // Implement a secure Flutter session handoff before enabling that flow.
+        rentsihoShowGoogleMessage(`Google authentication successful. Welcome ${data.name || "user"}! Opening Rentsiho...`);
+        // Navigate only after the backend confirms success.
+        // The Flutter app must independently verify its authenticated session;
+        // this URL is its existing login entry point, not an SSO bypass.
+        window.location.assign(rentsihoLoginUrl);
       } catch (error) {
         console.error("Google login request failed", error);
         rentsihoShowGoogleMessage("Could not reach the API. Check the backend URL and CORS settings.", true);
