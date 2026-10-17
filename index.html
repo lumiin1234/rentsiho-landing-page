@@ -1942,7 +1942,24 @@
       .about-logo { width: 175px; }
       .about-visual { min-height: 370px; }
     }
+  
+    /* Google login addition - existing website styles preserved */
+    .rentsiho-google-trigger {display:inline-flex;align-items:center;gap:9px;padding:10px 15px;background:#D4A72C;color:#0B1B29;border:0;border-radius:10px;font-weight:800;cursor:pointer}
+    .rentsiho-google-trigger:hover {background:#F0C85A}
+    .rentsiho-google-overlay {display:none;position:fixed;inset:0;z-index:99999;background:rgba(7,19,30,.72);align-items:center;justify-content:center;padding:18px}
+    .rentsiho-google-overlay.active {display:flex}
+    .rentsiho-google-modal {position:relative;width:100%;max-width:420px;padding:32px;background:#fff;border:1px solid #e6e0d4;border-radius:22px;box-shadow:0 25px 80px rgba(0,0,0,.25);text-align:center}
+    .rentsiho-google-modal h2 {color:#0B1B29;font-size:25px;margin-bottom:8px}
+    .rentsiho-google-modal p {color:#687078;font-size:14px;margin-bottom:22px}
+    .rentsiho-google-close {position:absolute;right:18px;top:15px;border:0;background:transparent;font-size:25px;color:#687078;cursor:pointer}
+    .rentsiho-google-role {width:100%;padding:13px;margin-bottom:22px;border:1px solid #e6e0d4;border-radius:11px;background:#fff;color:#0B1B29;font-size:15px}
+    .rentsiho-google-button {display:flex;justify-content:center;min-height:44px}
+    .rentsiho-google-message {margin-top:16px;font-size:13px;min-height:20px;overflow-wrap:anywhere}
+    .rentsiho-google-existing {display:inline-block;margin-top:20px;color:#A97912;font-weight:700;font-size:14px}
+    @media(max-width:480px){.rentsiho-google-modal{padding:28px 18px}}
   </style>
+  <!-- Google Identity Services: Google login popup -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 
 <body>
@@ -1978,6 +1995,10 @@
          data-dashboard-link>
          Login to Rentsiho
      </a>
+
+        <button type="button" class="rentsiho-google-trigger" id="openGoogleLogin">
+          <i class="fa-brands fa-google" aria-hidden="true"></i> Google Login
+        </button>
 
         <button
           class="menu-button"
@@ -2950,6 +2971,25 @@
     </div>
   </div>
 
+
+  <!-- Google login dialog: added without changing existing sections -->
+  <div id="rentsihoGoogleOverlay" class="rentsiho-google-overlay" aria-hidden="true">
+    <div class="rentsiho-google-modal" role="dialog" aria-modal="true" aria-labelledby="rentsihoGoogleTitle">
+      <button type="button" id="closeGoogleLogin" class="rentsiho-google-close" aria-label="Close Google login">&times;</button>
+      <h2 id="rentsihoGoogleTitle">Login to Rentsiho</h2>
+      <p>Select your role and sign in with Google.</p>
+      <label for="rentsihoGoogleRole" style="display:block;text-align:left;font-weight:700;margin-bottom:7px">Login as</label>
+      <select id="rentsihoGoogleRole" class="rentsiho-google-role">
+        <option value="owner">Owner</option>
+        <option value="tenant">Tenant</option>
+        <option value="superuser">Superuser</option>
+      </select>
+      <div id="rentsihoGoogleButton" class="rentsiho-google-button"></div>
+      <div id="rentsihoGoogleMessage" class="rentsiho-google-message" role="status" aria-live="polite"></div>
+      <a class="rentsiho-google-existing" href="https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net/?demo=true#/next2">Use existing email/password login</a>
+    </div>
+  </div>
+
   <script>
     // ============================================================
     // MOBILE MENU
@@ -3031,6 +3071,94 @@
     });
 
 </script>
+
+
+  <script>
+    // Google Login settings: replace the Client ID and verify the API host.
+    const RENTSIHO_GOOGLE_CLIENT_ID = "779255784206-r422l3egviqp4fhpvnh2o235v18m2rks.apps.googleusercontent.com";
+    const RENTSIHO_GOOGLE_API_BASE = "https://keynestfdashboard-fydbd8fydmdubjhm.canadacentral-01.azurewebsites.net";
+
+    const rentsihoOverlay = document.getElementById("rentsihoGoogleOverlay");
+    const rentsihoMessage = document.getElementById("rentsihoGoogleMessage");
+    const rentsihoRole = document.getElementById("rentsihoGoogleRole");
+    let rentsihoGoogleInitialized = false;
+    let rentsihoGoogleBusy = false;
+
+    function rentsihoShowGoogleMessage(message, isError = false) {
+      rentsihoMessage.textContent = message;
+      rentsihoMessage.style.color = isError ? "#c0392b" : "#237454";
+    }
+
+    function rentsihoCloseGoogle() {
+      rentsihoOverlay.classList.remove("active");
+      rentsihoOverlay.setAttribute("aria-hidden", "true");
+    }
+
+    function rentsihoInitializeGoogle() {
+      if (rentsihoGoogleInitialized) return;
+      if (RENTSIHO_GOOGLE_CLIENT_ID.startsWith("REPLACE_WITH_")) {
+        rentsihoShowGoogleMessage("Set your Google OAuth Client ID in the HTML before testing.", true);
+        return;
+      }
+      if (!window.google?.accounts?.id) {
+        rentsihoShowGoogleMessage("Google Sign-In is loading. Please try again shortly.", true);
+        return;
+      }
+      google.accounts.id.initialize({
+        client_id: RENTSIHO_GOOGLE_CLIENT_ID,
+        callback: rentsihoHandleGoogleCredential,
+        ux_mode: "popup"
+      });
+      google.accounts.id.renderButton(
+        document.getElementById("rentsihoGoogleButton"),
+        { theme: "outline", size: "large", text: "signin_with", shape: "rectangular", width: 300 }
+      );
+      rentsihoGoogleInitialized = true;
+      rentsihoShowGoogleMessage("");
+    }
+
+    document.getElementById("openGoogleLogin").addEventListener("click", () => {
+      rentsihoOverlay.classList.add("active");
+      rentsihoOverlay.setAttribute("aria-hidden", "false");
+      rentsihoInitializeGoogle();
+      rentsihoRole.focus();
+    });
+    document.getElementById("closeGoogleLogin").addEventListener("click", rentsihoCloseGoogle);
+    rentsihoOverlay.addEventListener("click", (event) => {
+      if (event.target === rentsihoOverlay) rentsihoCloseGoogle();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && rentsihoOverlay.classList.contains("active")) rentsihoCloseGoogle();
+    });
+
+    async function rentsihoHandleGoogleCredential(response) {
+      if (rentsihoGoogleBusy || !response?.credential) return;
+      rentsihoGoogleBusy = true;
+      rentsihoShowGoogleMessage("Checking your Rentsiho account...");
+      try {
+        const result = await fetch(`${RENTSIHO_GOOGLE_API_BASE}/api/google-login`, {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idToken: response.credential, role: rentsihoRole.value })
+        });
+        const data = await result.json().catch(() => ({}));
+        if (!result.ok) {
+          rentsihoShowGoogleMessage(data.message || `Google login failed (${result.status}).`, true);
+          return;
+        }
+        rentsihoShowGoogleMessage(`Google authentication successful. Welcome ${data.name || "user"}!`);
+        // Do NOT redirect straight into the Flutter dashboard: the API session
+        // is not automatically shared with the Flutter site on another origin.
+        // Implement a secure Flutter session handoff before enabling that flow.
+      } catch (error) {
+        console.error("Google login request failed", error);
+        rentsihoShowGoogleMessage("Could not reach the API. Check the backend URL and CORS settings.", true);
+      } finally {
+        rentsihoGoogleBusy = false;
+      }
+    }
+  </script>
 
 </body>
 </html>
