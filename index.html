@@ -1944,12 +1944,18 @@
     }
   
     /* Google login addition - existing website styles preserved */
-    .rentsiho-google-trigger {display:inline-flex;align-items:center;gap:9px;padding:10px 15px;background:#D4A72C;color:#0B1B29;border:0;border-radius:10px;font-weight:800;cursor:pointer}
-    .rentsiho-google-trigger:hover {background:#F0C85A}
+    .rentsiho-google-trigger {display:inline-flex;align-items:center;gap:9px;padding:10px 15px;background:#ffffff;color:#0B1B29;border:1px solid #dadce0;border-radius:10px;font-weight:800;cursor:pointer}
+    .rentsiho-google-trigger:hover {background:#f8fafc;transform:translateY(-2px);box-shadow:0 10px 24px rgba(11,27,41,.14)}
+    .rentsiho-google-trigger {min-height:44px;gap:10px;padding:9px 17px;border:1px solid #dadce0;box-shadow:0 3px 12px rgba(11,27,41,.08);transition:background .2s,transform .2s,box-shadow .2s;white-space:nowrap}
+    .rentsiho-google-logo {width:23px;height:23px;flex-shrink:0;background:transparent;padding:3px;border-radius:50%;box-sizing:content-box}
+    .rentsiho-google-trigger:focus-visible {outline:3px solid #0B1B29;outline-offset:3px}
     .rentsiho-google-overlay {display:none;position:fixed;inset:0;z-index:99999;background:rgba(7,19,30,.72);align-items:center;justify-content:center;padding:18px}
     .rentsiho-google-overlay.active {display:flex}
     .rentsiho-google-modal {position:relative;width:100%;max-width:420px;padding:32px;background:#fff;border:1px solid #e6e0d4;border-radius:22px;box-shadow:0 25px 80px rgba(0,0,0,.25);text-align:center}
     .rentsiho-google-modal h2 {color:#0B1B29;font-size:25px;margin-bottom:8px}
+    .rentsiho-google-modal {border-top:4px solid #D4A72C}
+    .rentsiho-google-modal .rentsiho-google-brand {display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:14px}
+    .rentsiho-google-modal .rentsiho-google-brand .rentsiho-google-logo {width:28px;height:28px;border:1px solid #e6e0d4;box-shadow:0 4px 12px rgba(0,0,0,.06)}
     .rentsiho-google-modal p {color:#687078;font-size:14px;margin-bottom:22px}
     .rentsiho-google-close {position:absolute;right:18px;top:15px;border:0;background:transparent;font-size:25px;color:#687078;cursor:pointer}
     .rentsiho-google-role {width:100%;padding:13px;margin-bottom:22px;border:1px solid #e6e0d4;border-radius:11px;background:#fff;color:#0B1B29;font-size:15px}
@@ -1997,7 +2003,7 @@
      </a>
 
         <button type="button" class="rentsiho-google-trigger" id="openGoogleLogin">
-          <i class="fa-brands fa-google" aria-hidden="true"></i> Google Login
+          <svg class="rentsiho-google-logo" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.28 5.48-4.81 7.18l7.73 6C44.37 38.03 46.98 31.88 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.4 14.4 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.2A23.9 23.9 0 0 0 0 24c0 3.87.93 7.51 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Google Login</span>
         </button>
 
         <button
@@ -2976,7 +2982,7 @@
   <div id="rentsihoGoogleOverlay" class="rentsiho-google-overlay" aria-hidden="true">
     <div class="rentsiho-google-modal" role="dialog" aria-modal="true" aria-labelledby="rentsihoGoogleTitle">
       <button type="button" id="closeGoogleLogin" class="rentsiho-google-close" aria-label="Close Google login">&times;</button>
-      <h2 id="rentsihoGoogleTitle">Login to Rentsiho</h2>
+      <div class="rentsiho-google-brand"><svg class="rentsiho-google-logo" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.28 5.48-4.81 7.18l7.73 6C44.37 38.03 46.98 31.88 46.98 24.55z"/><path fill="#FBBC05" d="M10.53 28.59A14.4 14.4 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.2A23.9 23.9 0 0 0 0 24c0 3.87.93 7.51 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><h2 id="rentsihoGoogleTitle">Login to Rentsiho</h2></div>
       <p>Select your role and sign in with Google.</p>
       <label for="rentsihoGoogleRole" style="display:block;text-align:left;font-weight:700;margin-bottom:7px">Login as</label>
       <select id="rentsihoGoogleRole" class="rentsiho-google-role">
