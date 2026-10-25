@@ -229,12 +229,14 @@
     if (saveBlocked || (currentId !== null && !Number.isInteger(version))) { message("Reopen the saved salary before saving again.", true); return; }
     message(""); if (!validate()) return;
     run(async () => {
-      message("Saving salary?");
+      message("Saving salary...");
       const data = payload();
       const result = currentId !== null ? await api.update(currentId, data) : await api.create(data);
-      saveBlocked = true; dirty = false;
-      try { fill(result); } catch (error) { await load(); throw new Error(`Salary saved. Reopen it from the list before editing. ${error.message}`); }
-      preview(); message("Salary saved successfully."); await load(1);
+      dirty = false;
+      reset();
+      views.show("list");
+      await load(1);
+      message(result?.message || "Salary saved successfully.");
     });
   });
   $("refresh-salaries").addEventListener("click", () => run(() => load()));
