@@ -1,33 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="session-checking">
 <head>
   <meta charset="UTF-8">
+  <style>.session-checking main { visibility: hidden; }</style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0d1c28">
   <title>Timesheet | Rentsiho</title>
   <link rel="icon" type="image/png" href="../rentsiho-logo.png">
-  <link rel="stylesheet" href="timesheet.css?v=monthly-7">
+  <link rel="stylesheet" href="timesheet.css?v=landing-login-1">
   <script defer src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.mini.min.js"></script>
-  <script defer src="auth-config.js?v=monthly-5"></script>
-  <script defer src="timesheet-api.js"></script>
-  <script defer src="google-auth.js?v=monthly-7"></script>
+  <script defer src="auth-config.js?v=unified-1"></script>
+  <script defer src="../session-guard.js?v=3"></script>
+  <script defer src="timesheet-api.js?v=session-1"></script>
+  <script defer src="google-auth.js?v=me-1"></script>
 </head>
 <body>
   <header class="header">
     <div class="container nav">
       <a class="brand" href="../" aria-label="Rentsiho home"><img class="brand-logo" src="../rentsiho-logo.png" alt="Rentsiho Property Management logo"></a>
-      <a class="home-link" href="../">Back to Home</a>
+      <nav class="nav-links" aria-label="Main navigation"><a class="home-link" href="../timesheet/" aria-current="page">Timesheet</a><a class="home-link" href="../invoice/">Invoice</a><a class="home-link" href="../salary/">Salary</a><a class="home-link" href="../">Back to Home</a></nav>
     </div>
   </header>
   <main class="container">
     <div class="page-heading"><span class="pill pill-light">Rentsiho Timesheet</span><h1>Monthly timesheet</h1><p>Choose a month, fill your daily work, and save everything once.</p></div>
     <p id="status" role="status" aria-live="polite"></p>
-    <section class="card" id="login-panel" aria-labelledby="login-title">
-      <h2 id="login-title">Sign in to Timesheet</h2>
-      <p>Use your Google account to continue directly to your timesheet.</p>
-      <div id="google-button" style="margin-top:20px"></div>
-      <p id="login-status" role="status" aria-live="polite">Loading Google Login…</p>
-    </section>
     <div id="timesheet-app" hidden>
     <div class="records-heading"><span id="account-name"></span><button class="btn btn-outline" id="signout-button" type="button">Logout</button></div>
     <section class="card" aria-labelledby="monthly-title">

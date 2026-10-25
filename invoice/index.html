@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" class="session-checking">
+<head>
+  <meta charset="UTF-8">
+  <style>.session-checking main { visibility: hidden; }</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoice | Rentsiho</title>
+  <link rel="icon" href="../rentsiho-logo.png">
+  <link rel="stylesheet" href="invoice.css?v=delete-1">
+  <script src="../timesheet/auth-config.js" defer></script>
+  <script src="../session-guard.js?v=3" defer></script>
+  <script src="invoice-api.js?v=feedback-1" defer></script>
+  <script src="../confirm-delete.js?v=1" defer></script>
+  <script src="../document-views.js?v=2" defer></script>
+  <script src="invoice.js?v=delete-10261024-2" defer></script>
+</head>
+<body>
+  <header><div class="container nav"><a href="../" aria-label="Rentsiho home"><img src="../rentsiho-logo.png" alt="Rentsiho" width="120" height="66"></a><nav class="nav-links" aria-label="Main navigation"><a class="home-link" href="../timesheet/">Timesheet</a><a class="home-link" href="../invoice/" aria-current="page">Invoice</a><a class="home-link" href="../salary/">Salary</a><a class="home-link" href="../">Back to Home</a></nav></div></header>
+  <main class="container">
+    <div class="document-navigation"><button type="button" class="button secondary" id="back-to-list" hidden>Back to list</button></div>
+    <noscript><p class="notice">Please enable JavaScript to calculate and preview your invoice.</p></noscript>
+    <div class="heading"><div><span class="eyebrow">RENT SIHO · BILLING</span><h1>Create an invoice</h1><p>Fill in your details and services. Your total updates automatically.</p></div></div>
+    <section class="card invoice-library" id="invoice-library" aria-labelledby="library-title">
+      <div class="section-top">
+        <div><h2 id="library-title">Saved invoices</h2><p class="help">Open an invoice to edit its details and services.</p></div>
+        <div class="action-group">
+          <button class="button secondary" id="refresh-invoices" type="button">Refresh</button>
+          <button class="button primary" id="new-invoice" type="button">+ New invoice</button>
+        </div>
+      </div>
+      <p id="list-status" role="status" aria-live="polite"></p>
+      <div class="table-scroll">
+        <table class="invoice-list">
+          <thead><tr><th scope="col">Invoice</th><th scope="col">Client</th><th scope="col">Date</th><th scope="col">Total CHF</th><th scope="col">Actions</th></tr></thead>
+          <tbody id="invoice-list"></tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button class="button secondary" id="previous-page" type="button" disabled>Previous</button>
+        <span id="page-label">Page 1</span>
+        <button class="button secondary" id="next-page" type="button" disabled>Next</button>
+      </div>
+    </section>
+    <p hidden id="editor-state" class="notice">New invoice · Not saved yet</p>
+    <p id="save-status" role="status" aria-live="polite"></p>
+    <form hidden id="invoice-form">
+      <p class="help required-hint"><span class="required-mark" aria-hidden="true">*</span> Required fields</p>
+      <section class="card"><h2>Invoice details</h2><div class="grid three">
+        <label><span>Invoice number <span class="required-mark" aria-hidden="true">*</span></span><input name="number" required maxlength="80" placeholder="INV-2026-001"></label>
+        <label><span>Invoice date <span class="required-mark" aria-hidden="true">*</span></span><input name="date" type="date" required></label>
+        <label><span>Payment due within (days) <span class="required-mark" aria-hidden="true">*</span></span><input name="paymentDays" type="number" min="0" max="365" step="1" value="30" required></label>
+      </div></section>
+      <div class="grid two parties">
+        <section class="card"><h2><span class="step">01</span> From</h2><div class="fields">
+          <label><span>Your company name <span class="required-mark" aria-hidden="true">*</span></span><input name="fromName" required maxlength="200" autocomplete="organization"></label>
+          <label><span>Street address <span class="required-mark" aria-hidden="true">*</span></span><textarea name="fromAddress" rows="2" required maxlength="500"></textarea></label>
+          <label><span>City, postcode and country <span class="required-mark" aria-hidden="true">*</span></span><input name="fromCity" required maxlength="200"></label>
+          <div class="grid two"><label>Email<input name="email" type="email" maxlength="200"></label><label>Phone<input name="phone" type="tel" maxlength="80"></label></div>
+          <label>Website<input name="website" maxlength="200" placeholder="www.example.com"></label>
+        </div></section>
+        <section class="card"><h2><span class="step">02</span> Billing to</h2><div class="fields">
+          <label><span>Client company name <span class="required-mark" aria-hidden="true">*</span></span><input name="toName" required maxlength="200"></label>
+          <label><span>Street address <span class="required-mark" aria-hidden="true">*</span></span><textarea name="toAddress" rows="2" required maxlength="500"></textarea></label>
+          <label><span>City, postcode and country <span class="required-mark" aria-hidden="true">*</span></span><input name="toCity" required maxlength="200"></label>
+          <p class="help">Enter the company or person receiving this invoice.</p>
+        </div></section>
+      </div>
+      <section class="card"><div class="section-top"><div><h2><span class="step">03</span> Services</h2><p class="help">Enter the days worked and daily rate in Swiss francs (CHF).</p></div><button class="button secondary" id="add-service" type="button">+ Add service</button></div>
+        <div class="table-scroll"><table class="editor-table"><thead><tr><th scope="col">Consultant <span class="required-mark" aria-hidden="true">*</span></th><th scope="col">Activity <span class="required-mark" aria-hidden="true">*</span></th><th scope="col">Month <span class="required-mark" aria-hidden="true">*</span></th><th scope="col">Days <span class="required-mark" aria-hidden="true">*</span></th><th scope="col">Daily rate (CHF) <span class="required-mark" aria-hidden="true">*</span></th><th scope="col">Total (CHF)</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead><tbody id="services"></tbody></table></div>
+        <div class="total-bar"><span>Total invoice <small>CHF</small></span><output id="grand-total" aria-live="polite">0.00</output></div>
+      </section>
+      <section class="card"><h2><span class="step">04</span> Payment instructions</h2><div class="grid three">
+        <label>Account name<input name="accountName" maxlength="200"></label><label>Bank name<input name="bankName" maxlength="200"></label><label>Account number / IBAN<input name="iban" maxlength="100"></label><label>IFSC / SWIFT<input name="swift" maxlength="80"></label><label>Branch<input name="branch" maxlength="200"></label>
+      </div><label class="notes">Additional instructions<textarea name="instructions" rows="3" maxlength="2000" placeholder="Optional payment notes"></textarea></label></section>
+      <div class="bottom-actions"><p class="help">Review the invoice before printing or saving it as PDF.</p><div class="action-group editor-actions"><button class="button secondary" id="preview-button" type="button">Preview invoice</button><button class="button primary" id="save-invoice" type="button">Save invoice</button></div></div>
+    </form>
+    <section id="preview" hidden aria-labelledby="preview-title">
+      <div class="preview-actions"><button class="button secondary" id="edit-button" type="button">← Continue editing</button><button class="button primary" id="print-button" type="button">Print / Save as PDF</button></div>
+      <article class="invoice-paper"><div class="paper-top"><div><span class="eyebrow">INVOICE</span><h2 id="preview-title">Invoice</h2></div><div><p>Invoice No. <strong data-value="number"></strong></p><p>Date: <span data-value="date"></span></p></div></div>
+        <div class="grid two paper-parties"><div><h3>From</h3><strong data-value="fromName"></strong><p data-value="fromAddress"></p><p data-value="fromCity"></p></div><div><h3>Billing To</h3><strong data-value="toName"></strong><p data-value="toAddress"></p><p data-value="toCity"></p></div></div>
+        <h3>Services</h3><div class="table-scroll"><table class="preview-table"><thead><tr><th>#</th><th>Consultant</th><th>Activity</th><th>Month</th><th>Days</th><th>Daily Rate (CHF)</th><th>Total CHF</th></tr></thead><tbody id="preview-services"></tbody></table></div>
+        <div class="paper-total">Total CHF <strong id="preview-total"></strong></div>
+        <div class="payment"><h3>Instructions</h3><p>Payable within <span data-value="paymentDays"></span> days.</p><dl id="payment-details"></dl><p data-value="instructions"></p></div>
+        <footer class="paper-footer"><strong data-value="fromName"></strong><p id="contact-details"></p></footer>
+      </article>
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+  </main><footer class="site-footer">Rentsiho · Rental Management Made Simple</footer>
+  <dialog id="feedback-dialog" class="feedback-dialog" aria-labelledby="feedback-title" aria-describedby="feedback-message">
+    <div id="feedback-icon" class="feedback-icon" aria-hidden="true"></div>
+    <h2 id="feedback-title"></h2>
+    <p id="feedback-message"></p>
+    <button id="feedback-close" class="button primary" type="button" autofocus>OK</button>
+  </dialog>
+  <dialog id="delete-dialog" class="feedback-dialog delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-message">
+    <div class="feedback-icon" aria-hidden="true">!</div>
+    <h2 id="delete-title">Delete invoice?</h2>
+    <p id="delete-message"></p>
+    <form method="dialog" class="delete-dialog-actions">
+      <button class="button secondary" value="cancel" autofocus>Cancel</button>
+      <button class="button danger" value="delete">Delete</button>
+    </form>
+  </dialog>
+</body>
+</html>

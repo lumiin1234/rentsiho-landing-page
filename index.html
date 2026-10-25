@@ -1964,6 +1964,8 @@
     .rentsiho-google-existing {display:inline-block;margin-top:20px;color:#A97912;font-weight:700;font-size:14px}
     @media(max-width:480px){.rentsiho-google-modal{padding:28px 18px}}
   </style>
+  <script src="timesheet/auth-config.js?v=unified-1"></script>
+  <script src="google-login.js?v=2"></script>
   <!-- Google Identity Services: Google login popup -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
@@ -2989,6 +2991,7 @@
         <option value="owner">Owner</option>
         <option value="tenant">Tenant</option>
         <option value="superuser">Superuser</option>
+        <option value="timesheet">Timesheet</option>
       </select>
       <div id="rentsihoGoogleButton" class="rentsiho-google-button"></div>
       <div id="rentsihoGoogleMessage" class="rentsiho-google-message" role="status" aria-live="polite"></div>
@@ -3056,7 +3059,7 @@
     // RENTSIHO -> REAL FLUTTER LOGIN PAGE
     // ============================================================
     const rentsihoLoginUrl =
-      "https://newflutterkeynest-aheucafef8cnhffz.canadacentral-01.azurewebsites.net/?demo=true#/next2";
+      window.TIMESHEET_AUTH_CONFIG.flutterDashboardUrl;
 
     document.querySelectorAll("[data-dashboard-link]").forEach((link) => {
       link.setAttribute("href", rentsihoLoginUrl);
@@ -3080,9 +3083,7 @@
 
 
   <script>
-    // Google Login settings: replace the Client ID and verify the API host.
-    const RENTSIHO_GOOGLE_CLIENT_ID = "779255784206-r422l3egviqp4fhpvnh2o235v18m2rks.apps.googleusercontent.com";
-    const RENTSIHO_GOOGLE_API_BASE = "https://keynestfdashboard-fydbd8fydmdubjhm.canadacentral-01.azurewebsites.net";
+    const RENTSIHO_GOOGLE_CLIENT_ID = window.TIMESHEET_AUTH_CONFIG.clientId;
 
     const rentsihoOverlay = document.getElementById("rentsihoGoogleOverlay");
     const rentsihoMessage = document.getElementById("rentsihoGoogleMessage");
@@ -3129,6 +3130,18 @@
       rentsihoInitializeGoogle();
       rentsihoRole.focus();
     });
+    if (new URLSearchParams(location.search).get("login") === "1") {
+      rentsihoRole.value = "timesheet";
+      document.getElementById("openGoogleLogin").click();
+      // Google may still be loading when the dialog is opened automatically.
+      const googleReady = setInterval(() => {
+        if (window.google?.accounts?.id) {
+          clearInterval(googleReady);
+          rentsihoInitializeGoogle();
+        }
+      }, 250);
+      setTimeout(() => clearInterval(googleReady), 15000);
+    }
     document.getElementById("closeGoogleLogin").addEventListener("click", rentsihoCloseGoogle);
     rentsihoOverlay.addEventListener("click", (event) => {
       if (event.target === rentsihoOverlay) rentsihoCloseGoogle();
@@ -3142,25 +3155,27 @@
       rentsihoGoogleBusy = true;
       rentsihoShowGoogleMessage("Checking your Rentsiho account...");
       try {
-        const result = await fetch(`${RENTSIHO_GOOGLE_API_BASE}/api/google-login`, {
-          method: "POST",
-          credentials: "include",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ idToken: response.credential, role: rentsihoRole.value })
-        });
-        const data = await result.json().catch(() => ({}));
-        if (!result.ok) {
-          rentsihoShowGoogleMessage(data.message || `Google login failed (${result.status}).`, true);
-          return;
+        const role = rentsihoRole.value;
+        const data = await window.rentsihoGoogleLogin.signIn(response.credential, role);
+        rentsihoShowGoogleMessage("Signed in successfully. Opening your workspace...");
+        let destination = window.rentsihoGoogleLogin.destination(role, data);
+        if (role === "timesheet") {
+          const next = new URLSearchParams(location.search).get("next");
+          if (next) {
+            try {
+              const target = new URL(next, location.origin);
+              if (target.origin === location.origin && /^\/(timesheet|invoice|salary)\/$/.test(target.pathname)) {
+                target.searchParams.delete("login");
+                target.searchParams.delete("next");
+                destination = target.pathname + target.search + target.hash;
+              }
+            } catch (_) {}
+          }
         }
-        rentsihoShowGoogleMessage(`Google authentication successful. Welcome ${data.name || "user"}! Opening Rentsiho...`);
-        // Navigate only after the backend confirms success.
-        // The Flutter app must independently verify its authenticated session;
-        // this URL is its existing login entry point, not an SSO bypass.
-        window.location.assign(rentsihoLoginUrl);
+        window.location.assign(destination);
       } catch (error) {
         console.error("Google login request failed", error);
-        rentsihoShowGoogleMessage("Could not reach the API. Check the backend URL and CORS settings.", true);
+        rentsihoShowGoogleMessage(error.message || "Could not reach the API. Check your connection.", true);
       } finally {
         rentsihoGoogleBusy = false;
       }

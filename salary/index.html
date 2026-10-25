@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="session-checking">
+<head>
+  <meta charset="UTF-8">
+  <style>.session-checking main { visibility: hidden; }</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salary | Rentsiho</title>
+  <link rel="icon" href="../rentsiho-logo.png">
+  <link rel="stylesheet" href="../invoice/invoice.css?v=delete-1">
+  <link rel="stylesheet" href="salary.css">
+  <script src="../timesheet/auth-config.js" defer></script>
+  <script src="../session-guard.js?v=3" defer></script>
+  <script src="salary-api.js?v=session-1" defer></script>
+  <script src="../confirm-delete.js?v=1" defer></script>
+  <script src="../document-views.js?v=2" defer></script>
+  <script src="salary.js?v=delete-1" defer></script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="../" aria-label="Rentsiho home"><img src="../rentsiho-logo.png" alt="Rentsiho" width="120" height="66"></a>
+      <nav class="nav-links" aria-label="Main navigation"><a class="home-link" href="../timesheet/">Timesheet</a><a class="home-link" href="../invoice/">Invoice</a><a class="home-link" href="../salary/" aria-current="page">Salary</a><a class="home-link" href="../">Back to Home</a></nav>
+    </div>
+  </header>
+  <main class="container">
+    <div class="document-navigation"><button type="button" class="button secondary" id="back-to-list" hidden>Back to list</button></div>
+    <div class="heading">
+      <div><span class="eyebrow">RENT SIHO · SALARY</span><h1>Create a salary statement</h1><p>Enter days or hours and a rate. Your total updates automatically.</p></div>
+      
+    </div>
+    <noscript><p class="notice">Enable JavaScript to create a salary statement.</p></noscript>
+    <section class="card salary-library" aria-labelledby="saved-title">
+      <div class="section-top"><div><h2 id="saved-title">Saved salary statements</h2><p class="help">Manage salary statements saved to your account.</p></div><button class="button primary" id="new-salary" type="button">+ New salary</button></div>
+      <div class="action-group"><label>Filter month<input id="period-filter" type="month"></label><button id="refresh-salaries" type="button" class="button secondary">Refresh</button></div><p id="list-status" role="status"></p>
+      <p id="empty-list" class="help">No salary statements saved yet.</p>
+      <div class="table-scroll"><table class="salary-list"><thead><tr><th scope="col">Reference</th><th scope="col">Employee</th><th scope="col">Period</th><th scope="col">Net pay CHF</th><th scope="col">Actions</th></tr></thead><tbody id="saved-salaries"></tbody></table></div>
+      <div class="pagination"><button id="previous-page" type="button" class="button secondary">Previous</button><span id="page-label">Page 1</span><button id="next-page" type="button" class="button secondary">Next</button></div>
+    </section>
+    <p id="status" role="status" aria-live="polite"></p>
+    <form hidden id="salary-form" novalidate>
+      <p class="help required-hint"><span class="required-mark" aria-hidden="true">*</span> Required fields</p>
+      <section class="card">
+        <h2>Salary details</h2>
+        <div class="grid three">
+          <label><span>Reference <span class="required-mark" aria-hidden="true">*</span></span><input name="reference" required maxlength="80" placeholder="SAL-2026-001"></label>
+          <label><span>Salary period <span class="required-mark" aria-hidden="true">*</span></span><input name="period" type="month" required min="1900-01" max="9999-12"></label>
+          <label><span>Payment date <span class="required-mark" aria-hidden="true">*</span></span><input name="paymentDate" type="date" required min="1900-01-01" max="9999-12-31"></label>
+        </div>
+      </section>
+      <div class="grid two parties">
+        <section class="card"><h2><span class="step">01</span> From · Company</h2><div class="fields">
+          <label><span>Company name <span class="required-mark" aria-hidden="true">*</span></span><input name="companyName" required maxlength="200" autocomplete="organization"></label>
+          <label><span>Company address <span class="required-mark" aria-hidden="true">*</span></span><textarea name="companyAddress" rows="3" required maxlength="500"></textarea></label>
+          <label>Company email<input name="companyEmail" type="email" maxlength="200"></label>
+        </div></section>
+        <section class="card"><h2><span class="step">02</span> To · Employee</h2><div class="fields">
+          <label><span>Employee name <span class="required-mark" aria-hidden="true">*</span></span><input name="employeeName" required maxlength="200" autocomplete="name"></label>
+          <label>Employee address<textarea name="employeeAddress" rows="3" maxlength="500"></textarea></label>
+          <label>Position<input name="position" maxlength="200"></label>
+        </div></section>
+      </div>
+      <section class="card"><h2><span class="step">03</span> Salary calculation</h2>
+        <div class="grid three">
+          <label><span>Rate basis <span class="required-mark" aria-hidden="true">*</span></span><select name="basis" required><option value="day">Per day</option><option value="hour">Per hour</option></select></label>
+          <label><span><span id="quantity-label">Days worked</span> <span class="required-mark" aria-hidden="true">*</span></span><input name="quantity" type="number" min="0.01" max="10000" step="0.01" required inputmode="decimal" placeholder="20"></label>
+          <label><span><span id="rate-label">Daily rate (CHF)</span> <span class="required-mark" aria-hidden="true">*</span></span><input name="rate" type="number" min="0" max="100000000" step="0.01" required inputmode="decimal" placeholder="200.00"></label>
+          <label>Bonus (CHF)<input name="bonus" type="number" min="0" max="100000000" step="0.01" value="0" inputmode="decimal"></label>
+          <label>Deductions (CHF)<input name="deductions" type="number" min="0" max="100000000" step="0.01" value="0" inputmode="decimal"></label>
+        </div>
+        <p class="help notes">Bonus and deductions are entered manually.</p>
+        <div class="salary-summary" aria-live="polite"><div><span>Base pay</span><output id="base-total">0.00</output></div><div><span>Gross pay</span><output id="gross-total">0.00</output></div><div class="net-total"><span>Net pay <small>CHF</small></span><output id="net-total">0.00</output></div></div>
+      </section>
+      <section class="card"><h2><span class="step">04</span> Payment notes</h2><label>Notes<textarea name="notes" rows="3" maxlength="2000" placeholder="Optional payment information"></textarea></label></section>
+      <div class="bottom-actions"><p class="help" id="editor-state">New salary · Not saved yet</p><div class="action-group"><button class="button secondary" id="save-salary" type="button">Save salary</button><button class="button primary" id="preview-button" type="button">Preview salary</button></div></div>
+    </form>
+    <section id="preview" hidden aria-labelledby="preview-title">
+      <div class="preview-actions"><button class="button secondary" id="edit-button" type="button">← Continue editing</button><button class="button primary" id="print-button" type="button">Print / Save as PDF</button></div>
+      <article class="invoice-paper">
+        <div class="paper-top"><div><span class="eyebrow">SALARY STATEMENT</span><h2 id="preview-title">Salary</h2></div><div><p>Reference: <strong data-value="reference"></strong></p><p>Period: <span data-value="period"></span></p><p>Payment date: <span data-value="paymentDate"></span></p></div></div>
+        <div class="grid two paper-parties"><div><h3>From · Company</h3><strong data-value="companyName"></strong><p data-value="companyAddress"></p><p data-value="companyEmail"></p></div><div><h3>To · Employee</h3><strong data-value="employeeName"></strong><p data-value="position"></p><p data-value="employeeAddress"></p></div></div>
+        <div class="table-scroll"><table class="preview-table"><thead><tr><th>Description</th><th>Quantity</th><th>Rate CHF</th><th>Amount CHF</th></tr></thead><tbody id="preview-calculation"></tbody></table></div>
+        <div class="paper-total">Net pay CHF <strong id="preview-net"></strong></div>
+        <div class="payment"><h3>Payment notes</h3><p data-value="notes"></p></div>
+        <footer class="paper-footer"><strong data-value="companyName"></strong><p data-value="companyEmail"></p></footer>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer">Rentsiho · Rental Management Made Simple</footer>
+  <dialog id="delete-dialog" class="feedback-dialog delete-dialog" aria-labelledby="delete-title" aria-describedby="delete-message">
+    <div class="feedback-icon" aria-hidden="true">!</div>
+    <h2 id="delete-title">Delete salary?</h2>
+    <p id="delete-message"></p>
+    <form method="dialog" class="delete-dialog-actions">
+      <button class="button secondary" value="cancel" autofocus>Cancel</button>
+      <button class="button danger" value="delete">Delete</button>
+    </form>
+  </dialog>
+</body>
+</html>
