@@ -7,12 +7,14 @@
   <meta name="theme-color" content="#0d1c28">
   <title>Timesheet | Rentsiho</title>
   <link rel="icon" type="image/png" href="../rentsiho-logo.png">
-  <link rel="stylesheet" href="timesheet.css?v=landing-login-1">
-  <script defer src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.mini.min.js"></script>
+  <link rel="stylesheet" href="timesheet.css?v=company-1">
+  <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
   <script defer src="auth-config.js?v=unified-1"></script>
   <script defer src="../session-guard.js?v=3"></script>
-  <script defer src="timesheet-api.js?v=session-1"></script>
-  <script defer src="google-auth.js?v=me-1"></script>
+  <script defer src="timesheet-api.js?v=company-1"></script>
+  <script defer src="timesheet-export.js?v=1"></script>
+  <script defer src="timesheet-company.js?v=2"></script>
+  <script defer src="google-auth.js?v=excel-logo-1"></script>
 </head>
 <body>
   <header class="header">
@@ -39,6 +41,29 @@
         <input id="month-picker" type="hidden">
         <div class="total"><span>Total working days</span><strong id="month-total">0</strong><span id="month-filled">0 filled rows</span></div>
       </div>
+      <section class="timesheet-parties" aria-labelledby="parties-title">
+        <div class="parties-heading"><h3 id="parties-title">Company details</h3><p>Saved with this month. Company details and your logo are included in the Excel export.</p></div>
+        <div class="company-logo-controls">
+          <label>Company logo<input id="company-logo-file" type="file" accept="image/png,image/jpeg,image/webp"></label>
+          <img id="company-logo-preview" alt="Company logo" hidden>
+          <button id="company-logo-remove" class="btn btn-outline" type="button">Remove logo</button>
+          <span id="company-logo-status" role="status"></span>
+          <p class="table-help">PNG, JPEG or WebP; up to 2 MiB, 4096 pixels per side and 4 million pixels. Uploading does not save the month.</p>
+        </div>
+        <div id="month-conflict" hidden role="alert"><p>This month changed on the server. Download your draft before reloading, then compare and reapply your changes.</p><button id="download-month-draft" class="btn btn-outline" type="button">Download draft</button> <button id="reload-month" class="btn btn-outline" type="button">Reload server version</button></div>
+        <div class="parties-grid">
+          <fieldset><legend>From Your company</legend>
+            <label>Company name<input id="from-company-name" maxlength="200" autocomplete="organization" placeholder="Your company name"></label>
+            <label>Address<textarea id="from-company-address" rows="2" maxlength="500" placeholder="Street, city, postcode and country"></textarea></label>
+            <label>Email<input id="from-company-email" type="email" maxlength="200" placeholder="company@example.com"></label>
+          </fieldset>
+          <fieldset><legend>To Client / recipient</legend>
+            <label>Company / recipient name<input id="to-company-name" maxlength="200" placeholder="Client or recipient name"></label>
+            <label>Address<textarea id="to-company-address" rows="2" maxlength="500" placeholder="Street, city, postcode and country"></textarea></label>
+            <label>Email<input id="to-company-email" type="email" maxlength="200" placeholder="client@example.com"></label>
+          </fieldset>
+        </div>
+      </section>
       <p class="weekend-legend"><span aria-hidden="true"></span>Saturday and Sunday are highlighted. Weekend work can still be saved.</p>
       <form id="month-form">
         <div class="actions"><button id="save-month" class="btn btn-primary" type="submit">Save month</button><button id="export-button" class="btn btn-outline" type="button">Export month (.xlsx)</button><span id="month-state" role="status" aria-live="polite"></span></div>

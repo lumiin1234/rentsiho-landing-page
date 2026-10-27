@@ -1,6 +1,12 @@
 "use strict";
 if (!window.TIMESHEET_USER) throw new Error("Login is required.");
 const $ = id => document.getElementById(id), api = window.timesheetApi;
+let loadGeneration = 0, conflict = false;
+const company = window.createTimesheetCompany(() => {
+  monthDirty = true;
+  $("month-state").textContent = "Unsaved changes";
+});
+function companyValues() { return company.values(); }
 function mapRecord(row) {
   if (!row || row.id == null || typeof row.work_date !== "string" || ![0,0.5,1].includes(Number(row.days))) throw new Error("Unexpected Timesheet record format. Expected work_date, days, location, phase and task_notes.");
   return {id:row.id,workDate:row.work_date.slice(0,10),days:Number(row.days),location:row.location ?? "",phase:row.phase ?? "",taskNotes:row.task_notes ?? ""};
@@ -23,14 +29,17 @@ const store={async list(from,to,page) {
 }};
 function message(text) { $("status").textContent=text; }
 function controls() {
-  document.querySelectorAll("#month-form input,#month-form select,#month-form textarea,#month-form button,#month-select,#year-select,#current-month,#last-month").forEach(e=>e.disabled=busy || !window.TIMESHEET_USER);
-  $("save-month").disabled=busy || !monthReady || !window.TIMESHEET_USER;
+  document.querySelectorAll("#timesheet-app .timesheet-parties input,#timesheet-app .timesheet-parties textarea,#company-logo-remove,#month-form input,#month-form select,#month-form textarea,#month-form button,#month-select,#year-select,#current-month,#last-month").forEach(e=>e.disabled=busy || !monthReady || !window.TIMESHEET_USER);
+  $("save-month").disabled=busy || !monthReady || conflict || !window.TIMESHEET_USER;
   $("export-button").disabled=busy || !monthReady || !window.TIMESHEET_USER;
 }
 async function run(action) {
   if (busy || !window.TIMESHEET_USER) return;
   busy=true; controls(); message("");
-  try { await action(); } catch(error) { message(error.message); }
+  try { await action(); } catch(error) {
+    message(error.message);
+    if (error.status === 409) { conflict = true; $("month-conflict").hidden = false; }
+  }
   finally { busy=false; controls(); }
 }
 let monthReady = false, monthDirty = false;
@@ -55,10 +64,12 @@ function monthlyBody(row) {
 async function loadMonth(force = false) {
   if (monthDirty && !force) return;
   monthReady = false;
+  const requestGeneration = ++loadGeneration;
   const month = $("month-picker").value;
   if (!/^\d{4}-\d{2}$/.test(month)) throw new Error("Choose a month.");
   const [year,number] = month.split("-").map(Number);
   const count = new Date(year,number,0).getDate(), start = `${month}-01`, end = `${month}-${count}`;
+  const details = company.validate(await api(`/api/timesheets/month-details?period=${encodeURIComponent(month)}`), month);
   let records = [], current = 1;
   while (true) {
     const result = await store.list(start,end,current++);
@@ -66,6 +77,11 @@ async function loadMonth(force = false) {
     if (records.length >= result.total) break;
     if (!result.items.length) throw new Error("Unable to load all monthly records.");
   }
+  if (requestGeneration !== loadGeneration || month !== $("month-picker").value || !window.TIMESHEET_USER) return;
+  if (records.some(record => !record.workDate.startsWith(month + "-"))) throw new Error("The API returned records outside the selected month.");
+  await company.apply(details);
+  if (requestGeneration !== loadGeneration || !window.TIMESHEET_USER) return;
+  conflict = false; $("month-conflict").hidden = true;
   $("month-rows").replaceChildren();
   for (let day=1;day<=count;day++) {
     const date = `${month}-${String(day).padStart(2,"0")}`;
@@ -126,26 +142,42 @@ function openRelativeMonth(offset) {
 $("current-month").addEventListener("click",()=>openRelativeMonth(0));
 $("last-month").addEventListener("click",()=>openRelativeMonth(-1));
 $("month-form").addEventListener("submit",event=> {
-  event.preventDefault(); if (!monthReady || !$("month-form").reportValidity()) return;
+  event.preventDefault(); if (busy || conflict || !monthReady || !company.valid() || !$("month-form").reportValidity()) return;
   const rows=[...$("month-rows").rows], entries=[], deleteIds=[];
   for (const row of rows) {
     const body=monthlyBody(row), days=row.querySelector('[name="days"]').value;
+    if (!body.workDate.startsWith($("month-picker").value + "-")) { message("Entry does not belong to the selected month."); return; }
     if (!days && row.dataset.cleared && body.id != null && !body.location && !body.phase && !body.taskNotes) { deleteIds.push(body.id); continue; }
     if (!days && (body.id != null || body.location || body.phase || body.taskNotes)) { message(`Choose working days for ${body.workDate}.`); return; }
     if (days && JSON.stringify(body)!==row.dataset.original) entries.push(body);
   }
-  if (!entries.length && !deleteIds.length) { $("month-state").textContent="No changes to save."; return; }
+  const detailsChanged = company.dirty();
+  if (!entries.length && !deleteIds.length && !detailsChanged) { $("month-state").textContent="No changes to save."; return; }
   if (entries.length > 100) { message("Save up to 100 changed entries at a time."); return; }
   run(async()=> {
-    const result=await api("/api/timesheets/batch",{method:"POST",body:JSON.stringify({entries,deleteIds})});
-    if (!Array.isArray(result?.items) || result.items.length!==entries.length) throw new Error("Unexpected batch response. Reload the month before saving again.");
-    const saved=result.items.map(mapRecord);
-    let index=0;
-    for (const row of rows) if (row.querySelector('[name="days"]').value && JSON.stringify(monthlyBody(row))!==row.dataset.original) {
-      row.dataset.id=saved[index++].id; row.dataset.original=JSON.stringify(monthlyBody(row));
+    const period = $("month-picker").value;
+    const body = { entries, deleteIds };
+    if (detailsChanged) { body.period = period; body.monthDetails = company.payload(); }
+    const result=await api("/api/timesheets/batch",{method:"POST",body:JSON.stringify(body)});
+    if (!window.TIMESHEET_USER) return;
+    if (!Array.isArray(result?.items) || result.items.length !== entries.length) throw new Error("Unexpected batch response. Preserve your draft and reload before saving again.");
+    const saved = result.items.map(mapRecord);
+    if (saved.some(record => !record.workDate.startsWith(period + "-"))) throw new Error("Unexpected saved record month.");
+    const changedRows = rows.filter(row => row.querySelector('[name="days"]').value && JSON.stringify(monthlyBody(row)) !== row.dataset.original);
+    for (const row of changedRows) {
+      const index = saved.findIndex(record => record.workDate === row.dataset.date && (row.dataset.id == null || String(record.id) === row.dataset.id));
+      if (index < 0) throw new Error("Unable to reconcile saved records. Reload before saving again.");
+      const record = saved.splice(index, 1)[0];
+      row.dataset.id = record.id;
+      for (const name of ["days", "location", "phase", "taskNotes"]) row.querySelector(`[name="${name}"]`).value = record[name];
+      row.dataset.original = JSON.stringify(monthlyBody(row));
     }
-    monthDirty=false; $("month-state").textContent=`Saved ${saved.length} entries.`;
-    await loadMonth(true);
+    for (const row of rows) if (deleteIds.includes(Number(row.dataset.id))) {
+      delete row.dataset.id; delete row.dataset.cleared; row.dataset.original = JSON.stringify(monthlyBody(row));
+    }
+    if (result.monthDetails) await company.apply(company.validate(result.monthDetails, period));
+    else if (detailsChanged) throw new Error("Saved response is missing monthly details. Reload before saving again.");
+    monthDirty = false; updateMonthlySummary();
     $("month-state").textContent="Month saved.";
   });
 });
@@ -154,14 +186,30 @@ window.addEventListener("timesheet-before-logout",event=> {
   else if (monthDirty && !confirm("Log out and discard unsaved changes?")) event.preventDefault();
 });
 window.addEventListener("beforeunload",event=> { if (monthDirty) { event.preventDefault(); event.returnValue=""; } });
-window.addEventListener("timesheet-session-expired",()=> { monthReady=false; monthDirty=false; $("month-rows").replaceChildren(); updateMonthlySummary(); $("month-state").textContent=""; controls(); });
-$("export-button").addEventListener("click",()=> {
-  if (!window.XLSX) { message("Excel library unavailable. Reload the page."); return; }
+window.addEventListener("timesheet-session-expired",()=> { monthReady=false; monthDirty=false; loadGeneration++; company.clear(); $("month-rows").replaceChildren(); updateMonthlySummary(); $("month-state").textContent=""; controls(); });
+$("export-button").addEventListener("click",()=> run(async () => {
+  if (!window.ExcelJS) throw new Error("Excel library unavailable. Reload the page.");
+  if (!monthReady || !window.TIMESHEET_USER || !company.valid()) return;
+  const logo = await company.exportLogo();
+  if (!window.TIMESHEET_USER) return;
   const entries=[...$("month-rows").rows].filter(row=>row.querySelector('[name="days"]').value!=="").map(monthlyBody);
-  const rows=[["Date","Days","Location","Phase","Task Notes"],...entries.map(e=>[e.workDate,e.days,e.location,e.phase,e.taskNotes]),["Total working days",entries.reduce((sum,e)=>sum+e.days,0)]];
-  const sheet=XLSX.utils.aoa_to_sheet(rows), book=XLSX.utils.book_new();
-  sheet["!cols"]=[{wch:15},{wch:8},{wch:25},{wch:25},{wch:60}];
-  XLSX.utils.book_append_sheet(book,sheet,"Timesheet"); XLSX.writeFile(book,`Timesheet-${$("month-picker").value}.xlsx`);
+  const workbook = await window.buildTimesheetWorkbook({ period: $("month-picker").value, details: company.payload(), entries, logo });
+  const buffer = await workbook.xlsx.writeBuffer();
+  if (!window.TIMESHEET_USER) return;
+  const url = URL.createObjectURL(new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
+  const link = document.createElement("a"); link.href = url; link.download = `Timesheet-${$("month-picker").value}.xlsx`;
+  document.body.append(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}));
+$("company-logo-file").addEventListener("change", () => run(() => company.upload()));
+$("reload-month").addEventListener("click", () => {
+  if (confirm("Discard the draft and load the server version? Download your draft first if needed.")) run(() => loadMonth(true));
+});
+$("download-month-draft").addEventListener("click", () => {
+  const draft = { period: $("month-picker").value, monthDetails: company.payload(), rows: [...$("month-rows").rows].map(row => ({ ...monthlyBody(row), days: row.querySelector('[name="days"]').value, cleared: row.dataset.cleared === "true" })) };
+  const url = URL.createObjectURL(new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" }));
+  const link = document.createElement("a"); link.href = url; link.download = `Timesheet-draft-${draft.period}.json`; link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 });
 window.addEventListener("timesheet-login",()=>run(()=>loadMonth(true)));
 run(()=>loadMonth(true));

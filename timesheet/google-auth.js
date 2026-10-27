@@ -30,7 +30,7 @@
   document.getElementById("account-name").textContent = user.name || user.email || `User ${user.userId}`;
   const script = document.createElement("script");
   script.id = "timesheet-app-script";
-  script.src = "timesheet.js?v=monthly-7";
+  script.src = "timesheet.js?v=excel-logo-1";
   script.onerror = () => { document.getElementById("status").textContent = "Unable to load Timesheet. Reload the page."; };
   document.head.append(script);
   const signout = document.getElementById("signout-button");

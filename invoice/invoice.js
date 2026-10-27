@@ -11,6 +11,7 @@
   let busy = false;
   let saveBlocked = false;
   const api = window.invoiceApi;
+  const logo = window.createDocumentLogo({ changed: invalidate, run: runAction });
   const fieldMap = {
     number: "invoiceNumber", date: "invoiceDate", paymentDays: "paymentDays",
     fromName: "fromName", fromAddress: "fromAddress", fromCity: "fromCity",
@@ -55,7 +56,7 @@
 
   // Serialize all services on both POST and PUT; the backend replaces the full item set.
   function invoicePayload() {
-    const invoice = { currency: "CHF" };
+    const invoice = { currency: "CHF", ...logo.fields() };
     Object.entries(fieldMap).forEach(([name, key]) => {
       invoice[key] = name === "paymentDays" ? Number(value(name)) : value(name).trim();
     });
@@ -85,6 +86,8 @@
       throw new Error("The API detail must include id, version and at least one item.");
     }
     clearValidationErrors();
+    logo.apply(invoice);
+    document.getElementById("document-conflict").hidden = true;
     Object.entries(fieldMap).forEach(([name, key]) => {
       const savedValue = read(invoice, key) ?? "";
       field(name).value = name === "date" ? String(savedValue).slice(0, 10) : savedValue;
@@ -123,6 +126,7 @@
     } catch (error) {
       setMessage("save-status", "");
       showFeedback("error", error.message);
+      if (error.status === 409 || error.status === 412) { saveBlocked = true; document.getElementById("document-conflict").hidden = false; }
     } finally {
       controls.forEach((control, index) => { control.disabled = disabledStates[index]; });
       busy = false;
@@ -199,6 +203,8 @@
   function resetInvoice() {
     clearValidationErrors();
     form.reset();
+    logo.reset();
+    document.getElementById("document-conflict").hidden = true;
     each(form.elements, (input) => { if (input.setCustomValidity) input.setCustomValidity(""); });
     field("date").value = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
     services.textContent = "";
@@ -217,9 +223,14 @@
     const response = currentInvoice
       ? await api.update(currentInvoice.id, payload)
       : await api.create(payload);
-    // A successful write needs no detail reload: the list is the next screen.
     dirty = false;
-    resetInvoice();
+    const saved = unwrap(response);
+    const id = saved?.id ?? currentInvoice?.id;
+    saveBlocked = true;
+    if (id == null) throw new Error("Invoice saved. Reopen it from the list before editing again.");
+    currentInvoice = { id, version: null };
+    try { fillInvoice(unwrap(await api.get(id))); }
+    catch (error) { saveBlocked = true; throw new Error(`Invoice saved, but its latest details could not be loaded. Reopen it before saving again. ${error.message}`); }
     views.show("list");
     await loadInvoices(1);
     setMessage("save-status", "");
@@ -390,7 +401,7 @@
     showEditor();
     document.body.classList.remove("print-ready"); field("number").focus();
   });
-  document.getElementById("print-button").addEventListener("click", function () { if (showPreview()) window.print(); });
+  document.getElementById("print-button").addEventListener("click", () => runAction(async () => { if (showPreview()) { await logo.ready(); window.print(); } }));
   window.addEventListener("beforeunload", function (event) { if (dirty) { event.preventDefault(); event.returnValue = ""; } });
   addService();
   document.getElementById("save-invoice").addEventListener("click", () => {
@@ -415,6 +426,10 @@
   document.getElementById("refresh-invoices").addEventListener("click", () => runAction(() => loadInvoices()));
   document.getElementById("previous-page").addEventListener("click", () => runAction(() => loadInvoices(page - 1)));
   document.getElementById("next-page").addEventListener("click", () => runAction(() => loadInvoices(page + 1)));
+  document.getElementById("document-reload").addEventListener("click", () => runAction(async () => {
+    if (currentInvoice && confirm("Discard this draft and reload? Download it first if needed.")) fillInvoice(unwrap(await api.get(currentInvoice.id)));
+  }));
+  document.getElementById("document-draft").addEventListener("click", () => downloadDocumentDraft(invoicePayload()));
   views = window.createDocumentViews({
     label: "Invoice", plural: "Invoices", library: ".invoice-library", form: "invoice-form",
     editorOnly: ["#editor-state", ".editor-actions"], dirty: () => dirty, busy: () => busy,

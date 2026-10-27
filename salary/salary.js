@@ -5,6 +5,7 @@
   const $ = (id) => document.getElementById(id);
   const form = $("salary-form");
   const api = window.salaryApi;
+  const logo = window.createDocumentLogo({ changed: () => { dirty = true; updateTotals(); }, run });
   let version = null, busy = false, page = 1, totalCount = 0, activePeriod = "", saveBlocked = false;
   const fieldNames = ["reference", "period", "paymentDate", "companyName", "companyAddress", "companyEmail", "employeeName", "employeeAddress", "position", "basis", "quantity", "rate", "bonus", "deductions", "notes"];
   let currentId = null;
@@ -123,7 +124,7 @@
 
   function payload() {
     const data = values();
-    const result = { reference: data.reference, salaryPeriod: `${data.period}-01`, currency: "CHF" };
+    const result = { ...logo.fields(), reference: data.reference, salaryPeriod: `${data.period}-01`, currency: "CHF" };
     for (const name of ["paymentDate", "companyName", "companyAddress", "companyEmail", "employeeName", "employeeAddress", "position", "basis", "notes"]) result[name] = data[name] || null;
     for (const [name, key] of [["quantity", "quantityHundredths"], ["rate", "rateCents"], ["bonus", "bonusCents"], ["deductions", "deductionsCents"]]) result[key] = Math.round(Number(data[name] || 0) * 100);
     if (currentId !== null) result.version = version;
@@ -132,6 +133,8 @@
   function fill(record) {
     if (record?.id == null || !Number.isInteger(record.version)) throw new Error("Salary response must include id and version.");
     clearErrors();
+    logo.apply(record);
+    $("document-conflict").hidden = true;
     for (const name of fieldNames) field(name).value = record[name.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`)] ?? "";
     field("period").value = String(record.salary_period || "").slice(0, 7);
     field("paymentDate").value = String(record.payment_date || "").slice(0, 10);
@@ -151,7 +154,7 @@
     const states = controls.map(input => input.disabled);
     controls.forEach(input => { input.disabled = true; });
     $("save-salary").textContent = "Please wait?";
-    try { await action(); } catch (error) { message(error.message, true); }
+    try { await action(); } catch (error) { message(error.message, true); if (error.status === 409 || error.status === 412) { saveBlocked = true; $("document-conflict").hidden = false; } }
     finally {
       controls.forEach((input, index) => { input.disabled = states[index]; });
       busy = false; pagination(); updateTotals();
@@ -202,6 +205,8 @@
 
   function reset() {
     form.reset();
+    logo.reset();
+    $("document-conflict").hidden = true;
     clearErrors();
     const now = new Date();
     const date = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
@@ -220,7 +225,7 @@
   form.addEventListener("submit", (event) => { event.preventDefault(); preview(); });
   $("preview-button").addEventListener("click", preview);
   $("edit-button").addEventListener("click", () => { showEditor(); field("reference").focus(); });
-  $("print-button").addEventListener("click", () => window.print());
+  $("print-button").addEventListener("click", () => run(async () => { await logo.ready(); window.print(); }));
   $("new-salary").addEventListener("click", () => {
     if (!dirty || confirm("Discard unsaved changes and start a new salary?")) reset();
   });
@@ -232,8 +237,8 @@
       message("Saving salary...");
       const data = payload();
       const result = currentId !== null ? await api.update(currentId, data) : await api.create(data);
-      dirty = false;
-      reset();
+      saveBlocked = true; dirty = false;
+      fill(result);
       views.show("list");
       await load(1);
       message(result?.message || "Salary saved successfully.");
@@ -249,6 +254,10 @@
     if (dirty) { event.preventDefault(); event.returnValue = ""; }
   });
 
+  $("document-reload").addEventListener("click", () => run(async () => {
+    if (currentId !== null && confirm("Discard this draft and reload? Download it first if needed.")) fill(await api.get(currentId));
+  }));
+  $("document-draft").addEventListener("click", () => downloadDocumentDraft(payload()));
   reset();
   views = window.createDocumentViews({
     label: "Salary", plural: "Salary statements", library: ".salary-library", form: "salary-form",

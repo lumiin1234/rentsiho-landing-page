@@ -24,7 +24,8 @@ window.salaryApi = (() => {
     const text = await response.text();
     let data = null;
     try { data = text ? JSON.parse(text) : null; } catch (error) {
-      throw new Error(`The API returned an unexpected response (${response.status}).`);
+      if (!response.ok && text.trim()) data = text;
+      else throw new Error(`The API returned an unexpected response (${response.status}).`);
     }
     if (!response.ok) {
       const validationErrors = data?.errors && typeof data.errors === "object"
@@ -32,12 +33,10 @@ window.salaryApi = (() => {
           `${field}: ${Array.isArray(messages) ? messages.join(" ") : messages}`
         ).join("\n")
         : "";
-      const message = response.status === 401
-        ? "Your session is unavailable or expired. Sign in to the backend, then refresh the salaries."
-        : response.status === 409 || response.status === 412
-        ? "This salary has changed. Reopen it before saving or deleting again."
-        : validationErrors || data?.message || data?.detail || data?.title || `Request failed (${response.status}).`;
-      throw new Error(message);
+      const message = (typeof data === "string" ? data : data?.message || data?.detail || data?.title) || validationErrors || `Request failed (${response.status}).`;
+      const error = new Error(message);
+      error.status = response.status;
+      throw error;
     }
     return data;
   }

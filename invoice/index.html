@@ -6,13 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Invoice | Rentsiho</title>
   <link rel="icon" href="../rentsiho-logo.png">
-  <link rel="stylesheet" href="invoice.css?v=delete-1">
+  <link rel="stylesheet" href="invoice.css?v=logo-1">
   <script src="../timesheet/auth-config.js" defer></script>
   <script src="../session-guard.js?v=3" defer></script>
   <script src="invoice-api.js?v=feedback-1" defer></script>
+  <script src="../timesheet/timesheet-api.js?v=company-1" defer></script>
+  <script src="../document-logo.js?v=1" defer></script>
   <script src="../confirm-delete.js?v=1" defer></script>
   <script src="../document-views.js?v=2" defer></script>
-  <script src="invoice.js?v=delete-10261024-2" defer></script>
+  <script src="invoice.js?v=logo-1" defer></script>
 </head>
 <body>
   <header><div class="container nav"><a href="../" aria-label="Rentsiho home"><img src="../rentsiho-logo.png" alt="Rentsiho" width="120" height="66"></a><nav class="nav-links" aria-label="Main navigation"><a class="home-link" href="../timesheet/">Timesheet</a><a class="home-link" href="../invoice/" aria-current="page">Invoice</a><a class="home-link" href="../salary/">Salary</a><a class="home-link" href="../">Back to Home</a></nav></div></header>
@@ -43,6 +45,7 @@
     </section>
     <p hidden id="editor-state" class="notice">New invoice · Not saved yet</p>
     <p id="save-status" role="status" aria-live="polite"></p>
+    <div id="document-conflict" class="notice" hidden role="alert"><p>This document changed on the server. Download your draft, then reload and compare your changes.</p><button id="document-draft" type="button" class="button secondary">Download draft</button> <button id="document-reload" type="button" class="button secondary">Reload saved document</button></div>
     <form hidden id="invoice-form">
       <p class="help required-hint"><span class="required-mark" aria-hidden="true">*</span> Required fields</p>
       <section class="card"><h2>Invoice details</h2><div class="grid three">
@@ -52,6 +55,7 @@
       </div></section>
       <div class="grid two parties">
         <section class="card"><h2><span class="step">01</span> From</h2><div class="fields">
+          <div class="document-logo-controls"><label>Company logo<input id="document-logo-file" type="file" accept="image/png,image/jpeg,image/webp"></label><img id="document-logo-preview" alt="Company logo" hidden><button id="document-logo-remove" type="button" class="button secondary">Remove logo</button><p class="help">PNG, JPEG or WebP; up to 2 MiB, 4096 pixels per side and 4 million pixels. Save the document to apply changes.</p><p id="document-logo-status" role="status"></p></div>
           <label><span>Your company name <span class="required-mark" aria-hidden="true">*</span></span><input name="fromName" required maxlength="200" autocomplete="organization"></label>
           <label><span>Street address <span class="required-mark" aria-hidden="true">*</span></span><textarea name="fromAddress" rows="2" required maxlength="500"></textarea></label>
           <label><span>City, postcode and country <span class="required-mark" aria-hidden="true">*</span></span><input name="fromCity" required maxlength="200"></label>
@@ -76,7 +80,7 @@
     </form>
     <section id="preview" hidden aria-labelledby="preview-title">
       <div class="preview-actions"><button class="button secondary" id="edit-button" type="button">← Continue editing</button><button class="button primary" id="print-button" type="button">Print / Save as PDF</button></div>
-      <article class="invoice-paper"><div class="paper-top"><div><span class="eyebrow">INVOICE</span><h2 id="preview-title">Invoice</h2></div><div><p>Invoice No. <strong data-value="number"></strong></p><p>Date: <span data-value="date"></span></p></div></div>
+      <article class="invoice-paper"><img id="document-logo-print" class="document-logo-print" alt="Company logo" hidden><div class="paper-top"><div><span class="eyebrow">INVOICE</span><h2 id="preview-title">Invoice</h2></div><div><p>Invoice No. <strong data-value="number"></strong></p><p>Date: <span data-value="date"></span></p></div></div>
         <div class="grid two paper-parties"><div><h3>From</h3><strong data-value="fromName"></strong><p data-value="fromAddress"></p><p data-value="fromCity"></p></div><div><h3>Billing To</h3><strong data-value="toName"></strong><p data-value="toAddress"></p><p data-value="toCity"></p></div></div>
         <h3>Services</h3><div class="table-scroll"><table class="preview-table"><thead><tr><th>#</th><th>Consultant</th><th>Activity</th><th>Month</th><th>Days</th><th>Daily Rate (CHF)</th><th>Total CHF</th></tr></thead><tbody id="preview-services"></tbody></table></div>
         <div class="paper-total">Total CHF <strong id="preview-total"></strong></div>
